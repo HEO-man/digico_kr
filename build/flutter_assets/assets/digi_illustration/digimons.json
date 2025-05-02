@@ -1,0 +1,141 @@
+[
+  {
+    "name": "Agumon BB",
+    "grade": 25,
+    "type": "백신",
+    "element": "불",
+    "folderName": "agumon_bb",
+    "category": "Z진화"
+  },
+  {
+    "name": "Gabumon BF",
+    "grade": 25,
+    "type": "데이터",
+    "element": "물",
+    "folderName": "gabumon_bf",
+    "category": "Z진화"
+  },
+  {
+    "name": "Lucemon",
+    "grade": 25,
+    "type": "백신",
+    "element": "빛",
+    "folderName": "lucemon",
+    "category": "스페셜진화"
+  },
+  {
+    "name": "Omegamon MMˢᵖ",
+    "grade": 25,
+    "type": "백신",
+    "element": "물",
+    "folderName": "omegamon_mm_sp",
+    "category": "SP진화"
+  },
+  {
+    "name": "Omegamonˢᵖ",
+    "grade": 25,
+    "type": "백신",
+    "element": "빛",
+    "folderName": "omegamon_sp",
+    "category": "SP진화"
+  },
+  {
+    "name": "Takutoumon WM",
+    "grade": 25,
+    "type": "백신",
+    "element": "전기",
+    "folderName": "takutoumon_wm",
+    "category": "Z진화"
+  },
+  {
+    "name": "Takutoumon",
+    "grade": 25,
+    "type": "백신",
+    "element": "물",
+    "folderName": "takutoumon",
+    "category": "Z진화"
+  },
+  {
+    "name": "Shoutmon X7 SM",
+    "grade": 25,
+    "type": "백신",
+    "element": "빛",
+    "folderName": "shoutmon_x7_sm",
+    "category": "Z진화"
+  },
+  {
+    "name": "Shoutmon X7",
+    "grade": 25,
+    "type": "데이터",
+    "element": "불",
+    "folderName": "shoutmon_x7",
+    "category": "Z진화"
+  },
+  {
+    "name": "Shagaramon",
+    "grade": 25,
+    "type": "데이터",
+    "element": "물",
+    "folderName": "shagaramon",
+    "category": "Z진화"
+  },
+  {
+    "name": "Nezhamon CM",
+    "grade": 25,
+    "type": "데이터",
+    "element": "불",
+    "folderName": "nezhamon_cm",
+    "category": "Z진화"
+  },
+  {
+    "name": "Nezhamon",
+    "grade": 25,
+    "type": "데이터",
+    "element": "불",
+    "folderName": "nezhamon",
+    "category": "Z진화"
+  },
+  {
+    "name": "jougamon",
+    "grade": 25,
+    "type": "백신",
+    "element": "풀",
+    "folderName": "jougamon",
+    "category": "Z진화"
+  },
+  {
+    "name": "Erlangmon BM",
+    "grade": 25,
+    "type": "백신",
+    "element": "바람",
+    "folderName": "erlangmon_bm",
+    "category": "Z진화"
+  },
+  {
+    "name": "Erlangmon",
+    "grade": 25,
+    "type": "백신",
+    "element": "빛",
+    "folderName": "erlangmon",
+    "category": "Z진화"
+  },
+  {
+    "name": "Cendrillmon",
+    "grade": 25,
+    "type": "바이러스",
+    "element": "물",
+    "folderName": "cendrillmon",
+    "category": "Z진화"
+  },
+  {
+    "name": "Alphamon Ouryuken",
+    "grade": 25,
+    "type": "백신",
+    "element": "빛",
+    "folderName": "alphamon_ouryuken",
+    "category": "Jogress & Fusion"
+  }
+
+
+
+]
