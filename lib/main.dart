@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import 'home_menu_screen.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -13,12 +15,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      home: const HomeMenuScreen(),
       debugShowCheckedModeBanner: false,
       title: 'Digimon Codex',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const DigimonListScreen(),
     );
   }
 }
@@ -61,29 +63,6 @@ class _DigimonListScreenState extends State<DigimonListScreen> {
     _loadDigimons();
   }
 
-/*
-  Future<void> _loadDigimons() async {
-    // Confirm that the digimons.json asset exists and is accessible.
-    final manifestContent = await rootBundle.loadString('AssetManifest.json');
-    final Map<String, dynamic> manifestMap = json.decode(manifestContent);
-    if (!manifestMap.keys.contains('assets/digi_illustration/digimons.json')) {
-      debugPrint('Error: digimons.json not found in asset manifest.');
-      return;
-    }
-    final String jsonStr = await rootBundle.loadString('assets/digi_illustration/digimons.json');
-    final List<dynamic> jsonData = json.decode(jsonStr);
-    setState(() {
-      allDigimons = jsonData.map((e) => Digimon(
-        name: e['name'],
-        grade: e['grade'],
-        type: e['type'],
-        element: e['element'],
-        folderName: e['folderName'],
-      )).toList()
-        ..sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
-    });
-  }
-*/
   Future<void> _loadDigimons() async {
     final url = 'https://HEO-man.github.io/digimon-codex-kr/data/digi_illustration/digimons.json';
     try {
