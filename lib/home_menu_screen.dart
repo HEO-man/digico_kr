@@ -9,22 +9,29 @@ class HomeMenuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Digimon Codex'),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _buildMenuButton(context, '디지몬 정보', const DigimonListScreen()),
-            const SizedBox(height: 20),
-            _buildMenuButton(context, '공략 모음', const GuidesScreen()),
-            const SizedBox(height: 20),
-            _buildMenuButton(context, '로테이션 정보', const RotationScreen()),
-          ],
-        ),
+      body: Stack(
+        children: [
+          Image.asset(
+            'assets/main_ilst_04.png',
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 170, left: 24, right: 24),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const SizedBox(height: 80),
+                _buildMenuButton(context, '디지몬 정보', const DigimonListScreen()),
+                const SizedBox(height: 20),
+                _buildMenuButton(context, '공략 모음', const GuidesScreen()),
+                const SizedBox(height: 20),
+                _buildMenuButton(context, '로테이션 정보', const RotationScreen()),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -33,7 +40,16 @@ class HomeMenuScreen extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
-        style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 18)),
+        style: ElevatedButton.styleFrom(
+          padding: const EdgeInsets.symmetric(vertical: 14),
+          backgroundColor: Colors.white70,
+          foregroundColor: Colors.deepPurple,
+          elevation: 4,
+          shadowColor: Colors.black26,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+        ),
         onPressed: () {
           Navigator.push(
             context,
