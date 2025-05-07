@@ -2,4 +2,4 @@
 
 A new Flutter project.
 
-👉 [앱 바로가기 (GitHub Pages)](https://heo-man.github.io/myapp/)
+👉 [앱 바로가기 (GitHub Pages)](https://heo-man.github.io/digico_kr/)
