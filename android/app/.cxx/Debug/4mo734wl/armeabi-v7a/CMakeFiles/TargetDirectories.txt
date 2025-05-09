@@ -1,0 +1,2 @@
+/Users/junuk/AndroidStudioProjects/digico_kr/android/app/.cxx/Debug/4mo734wl/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/junuk/AndroidStudioProjects/digico_kr/android/app/.cxx/Debug/4mo734wl/armeabi-v7a/CMakeFiles/rebuild_cache.dir
