@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import 'home_menu_screen.dart';
+import 'digimon_registration.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,6 +22,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      routes: {
+        '/digimon_registration': (context) => const DigimonRegistrationScreen(),
+      },
     );
   }
 }
@@ -242,9 +246,56 @@ class _DigimonListScreenState extends State<DigimonListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(120),
-        child: Container(
+      appBar: AppBar(
+        toolbarHeight: 100,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: const Text('디지몬 목록', style: TextStyle(color: Colors.black)),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add, color: Colors.black),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  final TextEditingController _passwordController = TextEditingController();
+                  return AlertDialog(
+                    title: const Text('관리자 비밀번호'),
+                    content: TextField(
+                      controller: _passwordController,
+                      obscureText: true,
+                      decoration: const InputDecoration(
+                        hintText: '비밀번호를 입력하세요',
+                      ),
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('취소'),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          if (_passwordController.text == 'ilu') {
+                            Navigator.of(context).pop();
+                            Navigator.pushNamed(context, '/digimon_registration');
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('비밀번호가 틀렸습니다')),
+                            );
+                          }
+                        },
+                        child: const Text('확인'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+          ),
+        ],
+        flexibleSpace: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/digi_illustration/header_main_001.png'),
