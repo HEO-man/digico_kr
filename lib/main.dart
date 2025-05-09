@@ -393,16 +393,24 @@ class _DigimonListScreenState extends State<DigimonListScreen> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(8),
                           child: Image.network(
-                            'https://HEO-man.github.io/digimon-codex-kr/data/digi_illustration/${digimon.folderName}/${digimon.folderName}_ilst.png',
+                            'https://HEO-man.github.io/digimon-codex-kr/data/digi_illustration/${digimon.folderName}/illustration.png',
                             width: 56,
                             height: 56,
                             fit: BoxFit.cover,
                             errorBuilder: (context, error, stackTrace) {
-                              return Image.asset(
-                                'assets/icon/ic_missing.png',
+                              return Image.network(
+                                'https://HEO-man.github.io/digimon-codex-kr/data/digi_illustration/${digimon.folderName}/${digimon.folderName}_ilst.png',
                                 width: 56,
                                 height: 56,
                                 fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Image.asset(
+                                    'assets/icon/ic_missing.png',
+                                    width: 56,
+                                    height: 56,
+                                    fit: BoxFit.cover,
+                                  );
+                                },
                               );
                             },
                           ),
@@ -623,12 +631,18 @@ class _DigimonDetailScreenState extends State<DigimonDetailScreen> {
                       ),
                     ),
                     background: Image.network(
-                      'https://HEO-man.github.io/digimon-codex-kr/data/digi_illustration/${widget.digimon.folderName}/${widget.digimon.folderName}_ilst.png',
+                      'https://HEO-man.github.io/digimon-codex-kr/data/digi_illustration/${widget.digimon.folderName}/illustration.png',
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) {
-                        return Image.asset(
-                          'assets/icon/ic_missing.png',
+                        return Image.network(
+                          'https://HEO-man.github.io/digimon-codex-kr/data/digi_illustration/${widget.digimon.folderName}/${widget.digimon.folderName}_ilst.png',
                           fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Image.asset(
+                              'assets/icon/ic_missing.png',
+                              fit: BoxFit.cover,
+                            );
+                          },
                         );
                       },
                     ),

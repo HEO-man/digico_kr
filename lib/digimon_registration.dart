@@ -1139,7 +1139,7 @@ class _DigimonRegistrationScreenState extends State<DigimonRegistrationScreen> {
                         sendData: jsonEncode({
                           'filename': 'script.json',
                           'repo': 'digimon-codex-kr',
-                          'path': '$folderName/script.json',
+                          'folder': folderName,
                           'content_base64': scriptB64,
                         }),
                       );
@@ -1160,7 +1160,7 @@ class _DigimonRegistrationScreenState extends State<DigimonRegistrationScreen> {
                         sendData: jsonEncode({
                           'filename': 'illustration.png',
                           'repo': 'digimon-codex-kr',
-                          'path': '$folderName/illustration.png',
+                          'folder': folderName,
                           'content_base64': illustB64,
                         }),
                       );
@@ -1175,7 +1175,7 @@ class _DigimonRegistrationScreenState extends State<DigimonRegistrationScreen> {
                           sendData: jsonEncode({
                             'filename': entry.key,
                             'repo': 'digimon-codex-kr',
-                            'path': '$folderName/${entry.key}',
+                            'folder': folderName,
                             'content_base64': b64,
                           }),
                         );
