@@ -33,6 +33,15 @@ class _OutputTreeTabState extends State<OutputTreeTab> with AutomaticKeepAliveCl
     }
   }
 
+  String _getCurrentDescription(Map<String, dynamic> talent, int level) {
+    if (level == 0) return talent["description"].replaceAll(RegExp(r'n[%\w\s]*'), '');
+    final value = talent["levels"][level - 1]["value"];
+    return talent["description"].replaceAllMapped(
+      RegExp(r'n(%| points| chance)?'),
+      (match) => '$value${match[1] ?? ''}',
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -158,10 +167,7 @@ class _OutputTreeTabState extends State<OutputTreeTab> with AutomaticKeepAliveCl
                   Image.asset('assets/icon/talents/${talent["icon"]}', width: 48, height: 48),
                   const SizedBox(height: 8),
                   Text(
-                    talent["description"].replaceAll(
-                      'n%',
-                      level == 0 ? '' : talent["levels"][level - 1]["value"],
-                    ),
+                    _getCurrentDescription(talent, level),
                     style: const TextStyle(color: Colors.white),
                   ),
                   const SizedBox(height: 8),

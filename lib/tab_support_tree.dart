@@ -30,6 +30,15 @@ class _SupportTreeTabState extends State<SupportTreeTab> {
     }
   }
 
+  String _getCurrentDescription(Map<String, dynamic> talent, int level) {
+    final value = level == 0 ? '' : talent["levels"][level - 1]["value"];
+    return talent["description"]
+        .replaceAll('n%', value)
+        .replaceAll('n points', '$value points')
+        .replaceAll('n chance', '$value chance')
+        .replaceAll('n', value); // fallback case
+  }
+
   @override
   Widget build(BuildContext context) {
     if (talents.isEmpty) {
@@ -158,12 +167,13 @@ class _SupportTreeTabState extends State<SupportTreeTab> {
                 children: [
                   Image.asset('assets/icon/talents/${talent["icon"]}', width: 48, height: 48),
                   const SizedBox(height: 8),
-                  Text(
-                    talent["description"].replaceAll(
-                      'n%',
-                      level == 0 ? '' : talent["levels"][level - 1]["value"],
-                    ),
-                    style: const TextStyle(color: Colors.white),
+                  Builder(
+                    builder: (_) {
+                      return Text(
+                        _getCurrentDescription(talent, level),
+                        style: const TextStyle(color: Colors.white),
+                      );
+                    },
                   ),
                   const SizedBox(height: 8),
                   if (talent["remark"] != null)
