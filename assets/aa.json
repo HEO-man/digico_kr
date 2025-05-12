@@ -1,0 +1,342 @@
+[
+  {
+    "id": "hp_enhancement",
+    "icon": "hp_enhancement.png",
+    "name": "HP 강화",
+    "description": "전투에 돌입한 후, HP가 n% 증가합니다.",
+    "suitableFor": "HP 기반 디지몬에게 적합",
+    "remark": "참고: HP 기반 디지몬에게 추천됩니다.",
+    "levels": [
+      { "level": 1, "value": "1.0%" },
+      { "level": 2, "value": "2.0%" },
+      { "level": 3, "value": "3.0%" },
+      { "level": 4, "value": "4.0%" },
+      { "level": 5, "value": "5.0%" },
+      { "level": 6, "value": "6.0%" },
+      { "level": 7, "value": "7.0%" },
+      { "level": 8, "value": "9.0%" }
+    ],
+    "position": { "row": 0, "col": 0 }
+  },
+  {
+    "id": "debuff_hit_enhancement",
+    "icon": "debuff_hit_enhancement.png",
+    "name": "디버프 명중 강화",
+    "description": "디버프 명중이 n만큼 증가합니다.",
+    "suitableFor": "모든 제어형 또는 디버프형 서포트 디지몬에게 적합",
+    "remark": "참고: 디버프 기반 디지몬에게 추천됩니다.",
+    "levels": [
+      { "level": 1, "value": "100" },
+      { "level": 2, "value": "200" },
+      { "level": 3, "value": "300" },
+      { "level": 4, "value": "400" },
+      { "level": 5, "value": "500" },
+      { "level": 6, "value": "600" },
+      { "level": 7, "value": "700" },
+      { "level": 8, "value": "900" }
+    ],
+    "position": { "row": 0, "col": 1 }
+  },
+  {
+    "id": "spd_enhancement",
+    "icon": "spd_enhancement.png",
+    "name": "속도 강화",
+    "description": "SPD가 n만큼 증가합니다.",
+    "suitableFor": "모든 디지몬에게 적합",
+    "remark": "참고: 여분의 특성 포인트가 있는 DPS 디지몬에게도 권장됩니다.",
+    "levels": [
+      { "level": 1, "value": "12" },
+      { "level": 2, "value": "24" },
+      { "level": 3, "value": "36" },
+      { "level": 4, "value": "48" },
+      { "level": 5, "value": "60" },
+      { "level": 6, "value": "72" },
+      { "level": 7, "value": "84" },
+      { "level": 8, "value": "108" }
+    ],
+    "position": { "row": 0, "col": 3 }
+  },
+  {
+    "id": "life_regeneration",
+    "icon": "life_regeneration.png",
+    "name": "생명 재생",
+    "description": "자신의 턴에 공격을 건너뛰면, 최대 HP의 n%만큼 체력을 회복합니다.",
+    "suitableFor": "모든 디지몬에게 적합",
+    "remark": "참고: 여분의 특성 포인트가 있다면 배우는 것이 좋습니다.",
+    "levels": [
+      { "level": 1, "value": "2.5%" },
+      { "level": 2, "value": "5.0%" },
+      { "level": 3, "value": "7.5%" },
+      { "level": 4, "value": "10.0%" },
+      { "level": 5, "value": "12.5%" },
+      { "level": 6, "value": "17.5%" }
+    ],
+    "position": { "row": 1, "col": 1 }
+  },
+  {
+    "id": "desperate_redemption",
+    "icon": "desperate_redemption.png",
+    "name": "필사의 속죄",
+    "description": "자신이 사망할 경우, 모든 생존 아군에게 1턴 동안 n% 피해 감소 효과를 부여합니다.",
+    "suitableFor": "모든 디지몬에게 적합",
+    "remark": "참고: 해제할 수 없는 버프이며, 버프 효과 악용에는 사용할 수 없습니다.",
+    "levels": [
+      { "level": 1, "value": "2.5%" },
+      { "level": 2, "value": "5.0%" },
+      { "level": 3, "value": "7.5%" },
+      { "level": 4, "value": "10.0%" },
+      { "level": 5, "value": "12.5%" },
+      { "level": 6, "value": "17.5%" }
+    ],
+    "position": { "row": 1, "col": 2 }
+  },
+  {
+    "id": "double_protection",
+    "icon": "double_protection.png",
+    "name": "이중 보호",
+    "description": "전투에 돌입한 후, 치명타 저항이 n% 증가합니다.",
+    "suitableFor": "모든 디지몬에게 적합",
+    "remark": "참고: 치명타 저항 플러그인을 사용하는 경우에 강화됩니다.",
+    "levels": [
+      { "level": 1, "value": "1.2%" },
+      { "level": 2, "value": "2.4%" },
+      { "level": 3, "value": "3.6%" },
+      { "level": 4, "value": "4.8%" },
+      { "level": 5, "value": "6.0%" },
+      { "level": 6, "value": "8.0%" }
+    ],
+    "position": { "row": 1, "col": 3 }
+  },
+  {
+    "id": "exertion",
+    "icon": "exertion.png",
+    "name": "분투",
+    "description": "라운드에서 첫 공격 시 디버프 명중이 n만큼 증가합니다.",
+    "suitableFor": "디버프 기반 디지몬에게 적합",
+    "remark": "참고: 디버프 명중 수치가 더 필요한 경우 추천됩니다.",
+    "levels": [
+      { "level": 1, "value": "200" },
+      { "level": 2, "value": "400" },
+      { "level": 3, "value": "600" },
+      { "level": 4, "value": "800" },
+      { "level": 5, "value": "1000" },
+      { "level": 6, "value": "1200" },
+      { "level": 7, "value": "1400" },
+      { "level": 8, "value": "1800" }
+    ],
+    "position": { "row": 2, "col": 0 }
+  },
+  {
+    "id": "first_aid_medicine",
+    "icon": "first_aid_medicine.png",
+    "name": "응급 처치",
+    "description": "아군의 디버프를 해제할 때, n% 확률로 해당 아군의 HP를 10% 회복시킵니다.",
+    "suitableFor": "클렌저에게 적합",
+    "remark": "참고: 클렌저에게 필수 특성입니다.",
+    "levels": [
+      { "level": 1, "value": "10%" },
+      { "level": 2, "value": "20%" },
+      { "level": 3, "value": "30%" },
+      { "level": 4, "value": "40%" },
+      { "level": 5, "value": "50%" },
+      { "level": 6, "value": "60%" },
+      { "level": 7, "value": "75%" },
+      { "level": 8, "value": "100%" }
+    ],
+    "position": { "row": 2, "col": 1 }
+  },
+  {
+    "id": "final_words",
+    "icon": "final_words.png",
+    "name": "유언",
+    "description": "자신이 사망 시, n% 확률로 적에게 침묵 제어 상태를 1턴 부여합니다.",
+    "suitableFor": "서포트 및 컨트롤형 디지몬에게 적합",
+    "remark": "참고: 디버프 명중과 상태저항의 차이에 따라 효과가 달라집니다. (전투당 1회 발동)",
+    "levels": [
+      { "level": 1, "value": "20%" },
+      { "level": 2, "value": "40%" },
+      { "level": 3, "value": "60%" },
+      { "level": 4, "value": "80%" },
+      { "level": 5, "value": "100%" }
+    ],
+    "position": { "row": 2, "col": 2 }
+  },
+  {
+    "id": "healing_lights",
+    "icon": "healing_lights.png",
+    "name": "치유의 빛",
+    "description": "HP가 50% 이하인 아군에게 치유 효과가 n% 증가합니다.",
+    "suitableFor": "힐러에게 적합",
+    "remark": "참고: 힐러에게 필수 특성입니다.",
+    "levels": [
+      { "level": 1, "value": "2%" },
+      { "level": 2, "value": "4%" },
+      { "level": 3, "value": "6%" },
+      { "level": 4, "value": "10%" },
+      { "level": 5, "value": "12%" },
+      { "level": 6, "value": "14%" },
+      { "level": 7, "value": "18%" },
+      { "level": 8, "value": "18%" }
+    ],
+    "position": { "row": 2, "col": 3 }
+  },
+  {
+    "id": "concentrated_conciousness",
+    "icon": "concentrated_conciousness.png",
+    "name": "집중된 의식",
+    "description": "자신의 턴이 끝날 때, 1턴 동안 +1200 디버프 명중 버프를 받을 n% 확률이 있습니다.",
+    "suitableFor": "디버프 기반 디지몬에게 적합",
+    "remark": "참고: 해제할 수 없는 버프이며, 버프 효과 악용에는 사용할 수 없습니다.",
+    "levels": [
+      { "level": 1, "value": "33%" },
+      { "level": 2, "value": "66%" },
+      { "level": 3, "value": "100%" },
+      { "level": 4, "value": "1300 디버프 명중" },
+      { "level": 5, "value": "1400 디버프 명중" },
+      { "level": 6, "value": "1600 디버프 명중" }
+    ],
+    "position": { "row": 3, "col": 0 }
+  },
+  {
+    "id": "life_aid",
+    "icon": "life_aid.png",
+    "name": "생명 지원",
+    "description": "받은 피해의 n%가 HP가 가장 낮은 아군에게 회복 효과로 전환됩니다.",
+    "suitableFor": "모든 디지몬에게 적합",
+    "remark": "참고: 여분의 특성 포인트가 있을 때 자주 선택됩니다.",
+    "levels": [
+      { "level": 1, "value": "3.0%" },
+      { "level": 2, "value": "6.0%" },
+      { "level": 3, "value": "9.0%" },
+      { "level": 4, "value": "12.0%" },
+      { "level": 5, "value": "15.0%" },
+      { "level": 6, "value": "21.0%" }
+    ],
+    "position": { "row": 3, "col": 2 }
+  },
+  {
+    "id": "angel_blessing",
+    "icon": "angel_blessing.png",
+    "name": "천사의 가호",
+    "description": "HP가 50% 이하일 때, 받은 치유 효과의 비율이 n% 증가합니다.",
+    "suitableFor": "모든 디지몬에게 적합",
+    "remark": "참고: 보조 특성 트리 4번째 줄에서 가장 많이 선택되는 특성입니다.",
+    "levels": [
+      { "level": 1, "value": "10%" },
+      { "level": 2, "value": "20%" },
+      { "level": 3, "value": "30%" },
+      { "level": 4, "value": "40%" },
+      { "level": 5, "value": "50%" },
+      { "level": 6, "value": "70%" }
+    ],
+    "position": { "row": 3, "col": 3 }
+  },
+  {
+    "id": "blessings_inspirations",
+    "icon": "blessings_inspirations.png",
+    "name": "축복과 영감",
+    "description": "n% 확률로 자신이 부여한 버프의 지속시간이 1턴 증가합니다.",
+    "suitableFor": "버퍼에게 적합",
+    "remark": "참고: 모든 버프 부여자가 사용 가능할 수 있습니다.",
+    "levels": [
+      { "level": 1, "value": "4%" },
+      { "level": 2, "value": "8%" },
+      { "level": 3, "value": "12%" },
+      { "level": 4, "value": "16%" },
+      { "level": 5, "value": "20%" },
+      { "level": 6, "value": "24%" },
+      { "level": 7, "value": "28%" },
+      { "level": 8, "value": "32%" }
+    ],
+    "position": { "row": 4, "col": 1 }
+  },
+  {
+    "id": "sniper_fortress",
+    "icon": "sniper_fortress.png",
+    "name": "스나이퍼 요새",
+    "description": "실드가 있을 때, 디버프 명중 버프를 n만큼 얻습니다.",
+    "suitableFor": "디버프 기반 디지몬에게 적합",
+    "remark": "참고: 해제할 수 없는 버프이며, 버프 효과 악용에는 사용할 수 없습니다.",
+    "levels": [
+      { "level": 1, "value": "500" },
+      { "level": 2, "value": "1000" },
+      { "level": 3, "value": "1500" },
+      { "level": 4, "value": "2000" },
+      { "level": 5, "value": "2500" },
+      { "level": 6, "value": "3000" },
+      { "level": 7, "value": "3500" },
+      { "level": 8, "value": "4500" }
+    ],
+    "position": { "row": 4, "col": 2 }
+  },
+  {
+    "id": "jedi_counterattack",
+    "icon": "jedi_counterattack.png",
+    "name": "제다이 반격",
+    "description": "아군의 HP가 30% 이하로 떨어질 때, SPD 버프를 n만큼 획득합니다 (쿨다운 2턴).",
+    "suitableFor": "SPD 의존형 디지몬에게 적합",
+    "remark": "참고: 해제할 수 없는 버프이며, 버프 효과 악용에는 사용할 수 없습니다.",
+    "levels": [
+      { "level": 1, "value": "60" },
+      { "level": 2, "value": "120" },
+      { "level": 3, "value": "180" },
+      { "level": 4, "value": "240" },
+      { "level": 5, "value": "300" },
+      { "level": 6, "value": "360" },
+      { "level": 7, "value": "420" },
+      { "level": 8, "value": "540" }
+    ],
+    "position": { "row": 4, "col": 3 }
+  },
+  {
+    "id": "potential_explosion",
+    "icon": "potential_explosion.png",
+    "name": "잠재력 폭발",
+    "description": "전투에 돌입 시, n% 확률로 2 AP를 획득합니다.",
+    "suitableFor": "AP를 많이 소모하는 모든 디지몬에게 적합",
+    "remark": "참고: 일부 돌파가 낮은 디지몬에게 중요합니다.",
+    "levels": [
+      { "level": 1, "value": "10%" },
+      { "level": 2, "value": "20%" },
+      { "level": 3, "value": "30%" },
+      { "level": 4, "value": "40%" },
+      { "level": 5, "value": "50%" },
+      { "level": 6, "value": "70%" }
+    ],
+    "position": { "row": 5, "col": 0 }
+  },
+  {
+    "id": "endless_pain",
+    "icon": "endless_pain.png",
+    "name": "끝없는 고통",
+    "description": "자신이 부여한 디버프의 지속시간이 1턴 증가할 n% 확률이 있습니다. (제어 상태에는 적용되지 않음)",
+    "suitableFor": "모든 디버프 디지몬에게 적합",
+    "remark": "참고: 레드 코어 특성 업그레이드가 완전하지 않으면 선택하지 마세요.",
+    "levels": [
+      { "level": 1, "value": "8%" },
+      { "level": 2, "value": "16%" },
+      { "level": 3, "value": "24%" },
+      { "level": 4, "value": "32%" },
+      { "level": 5, "value": "40%" },
+      { "level": 6, "value": "48%" }
+    ],
+    "position": { "row": 5, "col": 1 }
+  },
+  {
+    "id": "double_energy",
+    "icon": "double_energy.png",
+    "name": "더블 에너지",
+    "description": "스킬 사용 후, EXE를 2배 획득할 n% 확률이 있습니다.",
+    "suitableFor": "모든 디지몬에게 적합",
+    "remark": "참고: 서포트 특성 트리에서 많이 선택되는 특성입니다.",
+    "levels": [
+      { "level": 1, "value": "8%" },
+      { "level": 2, "value": "16%" },
+      { "level": 3, "value": "24%" },
+      { "level": 4, "value": "28%" },
+      { "level": 5, "value": "32%" },
+      { "level": 6, "value": "40%" }
+    ],
+    "position": { "row": 5, "col": 2 }
+  }
+]

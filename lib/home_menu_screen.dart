@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:new_century/rotation_screen.dart';
 import 'guides_screen.dart';
 import 'main.dart';
+import 'talents_screen.dart';
 
 class HomeMenuScreen extends StatelessWidget {
   const HomeMenuScreen({super.key});
@@ -28,6 +29,8 @@ class HomeMenuScreen extends StatelessWidget {
                 _buildMenuButton(context, '공략 모음', const GuidesScreen()),
                 const SizedBox(height: 20),
                 _buildMenuButton(context, '로테이션 정보', const RotationScreen()),
+                const SizedBox(height: 20),
+                _buildMenuButton(context, '특성 찍기', const TalentsScreen()),
               ],
             ),
           ),

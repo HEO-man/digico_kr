@@ -1,7 +1,8 @@
 import 'package:image_picker/image_picker.dart';
 import 'dart:typed_data';
 import 'package:image/image.dart' as img;
-import 'dart:html' as html;
+//import 'dart:html' as html;
+import 'web_import.dart' if (dart.library.io) 'stub_import.dart';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -79,79 +80,68 @@ class _DigimonRegistrationScreenState extends State<DigimonRegistrationScreen> {
   final List<int?> breakthroughSkillIndexes = List.filled(6, null);
 
   void _importScriptJson() {
-    final uploadInput = html.FileUploadInputElement()..accept = '.json';
-    uploadInput.click();
-    uploadInput.onChange.listen((e) {
-      final file = uploadInput.files?.first;
-      if (file == null) return;
-      final reader = html.FileReader();
-      reader.readAsText(file);
-      reader.onLoadEnd.listen((event) {
-        final data = json.decode(reader.result as String);
-        setState(() {
-          nameController.text = data['name'] ?? '';
-          selectedElement = _matchElement(data['element']);
-          selectedType = _matchType(data['type']);
-          selectedRole =
-              ['딜러', '서포터', '컨트롤러'].contains(data['role'])
-                  ? data['role']
-                  : null;
+    importScriptJson((jsonStr) {
+      final data = json.decode(jsonStr);
+      setState(() {
+        nameController.text = data['name'] ?? '';
+        selectedElement = _matchElement(data['element']);
+        selectedType = _matchType(data['type']);
+        selectedRole =
+            ['딜러', '서포터', '컨트롤러'].contains(data['role'])
+                ? data['role']
+                : null;
 
-          final skills = data['skills'] ?? {};
-          normalSkillNameController.text = skills['normalSkill']?['name'] ?? '';
-          normalSkillTypeController.text = skills['normalSkill']?['type'] ?? '';
-          normalSkillApController.text = skills['normalSkill']?['ap'] ?? '';
-          normalSkillDescController.text =
-              skills['normalSkill']?['description'] ?? '';
+        final skills = data['skills'] ?? {};
+        normalSkillNameController.text = skills['normalSkill']?['name'] ?? '';
+        normalSkillTypeController.text = skills['normalSkill']?['type'] ?? '';
+        normalSkillApController.text = skills['normalSkill']?['ap'] ?? '';
+        normalSkillDescController.text =
+            skills['normalSkill']?['description'] ?? '';
 
-          mainSkillNameController.text = skills['mainSkill']?['name'] ?? '';
-          mainSkillTypeController.text = skills['mainSkill']?['type'] ?? '';
-          mainSkillApController.text = skills['mainSkill']?['ap'] ?? '';
-          mainSkillDescController.text =
-              skills['mainSkill']?['description'] ?? '';
-          // Populate mainSubSkillControllers from mainSkill['subSkills']
-          final subSkills = skills['mainSkill']?['subSkills'];
-          mainSubSkillControllers.clear();
-          if (subSkills is List) {
-            for (final sub in subSkills) {
-              final name = TextEditingController(text: sub['name'] ?? '');
-              final type = TextEditingController(text: sub['type'] ?? '');
-              final ap = TextEditingController(text: sub['ap'] ?? '');
-              final desc = TextEditingController(text: sub['description'] ?? '');
-              mainSubSkillControllers.add({
-                'name': name,
-                'type': type,
-                'ap': ap,
-                'description': desc,
-              });
-            }
+        mainSkillNameController.text = skills['mainSkill']?['name'] ?? '';
+        mainSkillTypeController.text = skills['mainSkill']?['type'] ?? '';
+        mainSkillApController.text = skills['mainSkill']?['ap'] ?? '';
+        mainSkillDescController.text =
+            skills['mainSkill']?['description'] ?? '';
+        final subSkills = skills['mainSkill']?['subSkills'];
+        mainSubSkillControllers.clear();
+        if (subSkills is List) {
+          for (final sub in subSkills) {
+            final name = TextEditingController(text: sub['name'] ?? '');
+            final type = TextEditingController(text: sub['type'] ?? '');
+            final ap = TextEditingController(text: sub['ap'] ?? '');
+            final desc = TextEditingController(text: sub['description'] ?? '');
+            mainSubSkillControllers.add({
+              'name': name,
+              'type': type,
+              'ap': ap,
+              'description': desc,
+            });
           }
+        }
 
-          subSkillNameController.text = skills['subSkill']?['name'] ?? '';
-          subSkillTypeController.text = skills['subSkill']?['type'] ?? '';
-          subSkillApController.text = skills['subSkill']?['ap'] ?? '';
-          subSkillDescController.text =
-              skills['subSkill']?['description'] ?? '';
+        subSkillNameController.text = skills['subSkill']?['name'] ?? '';
+        subSkillTypeController.text = skills['subSkill']?['type'] ?? '';
+        subSkillApController.text = skills['subSkill']?['ap'] ?? '';
+        subSkillDescController.text =
+            skills['subSkill']?['description'] ?? '';
 
-          passiveSkillNameController.text =
-              skills['passiveSkill']?['name'] ?? '';
-          passiveSkillDescController.text =
-              skills['passiveSkill']?['description'] ?? '';
+        passiveSkillNameController.text =
+            skills['passiveSkill']?['name'] ?? '';
+        passiveSkillDescController.text =
+            skills['passiveSkill']?['description'] ?? '';
 
-          // Populate exclusiveCore fields
-          exclusiveEffectController.text =
-              data['exclusiveCore']?['exclusiveEffect'] ?? '';
-          suitableEffectController.text =
-              data['exclusiveCore']?['suitableEffect'] ?? '';
+        exclusiveEffectController.text =
+            data['exclusiveCore']?['exclusiveEffect'] ?? '';
+        suitableEffectController.text =
+            data['exclusiveCore']?['suitableEffect'] ?? '';
 
-          // Populate breakthrough fields
-          final bt = data['breakthrough'] ?? {};
-          for (int i = 0; i < 6; i++) {
-            breakthroughEffects[i].text = bt['${i + 1}']?['effect'] ?? '';
-            breakthroughStats[i].text = bt['${i + 1}']?['statsBoost'] ?? '';
-            breakthroughSkillIndexes[i] = bt['${i + 1}']?['skillIndex'];
-          }
-        });
+        final bt = data['breakthrough'] ?? {};
+        for (int i = 0; i < 6; i++) {
+          breakthroughEffects[i].text = bt['${i + 1}']?['effect'] ?? '';
+          breakthroughStats[i].text = bt['${i + 1}']?['statsBoost'] ?? '';
+          breakthroughSkillIndexes[i] = bt['${i + 1}']?['skillIndex'];
+        }
       });
     });
   }
@@ -453,128 +443,8 @@ class _DigimonRegistrationScreenState extends State<DigimonRegistrationScreen> {
                                           icon: const Icon(Icons.upload_file),
                                           label: const Text("script.json 불러오기"),
                                           onPressed: () {
-                                            final uploadInput =
-                                                html.FileUploadInputElement()
-                                                  ..accept = '.json';
-                                            uploadInput.click();
-                                            uploadInput.onChange.listen((e) {
-                                              final file = uploadInput.files?.first;
-                                              if (file == null) return;
-                                              final reader = html.FileReader();
-                                              reader.readAsText(file);
-                                              reader.onLoadEnd.listen((event) {
-                                                final data = json.decode(
-                                                  reader.result as String,
-                                                );
-                                                localSetState(() {
-                                                  nameController.text =
-                                                      data['name'] ?? '';
-                                                  selectedElement = _matchElement(
-                                                    data['element'],
-                                                  );
-                                                  selectedType = _matchType(
-                                                    data['type'],
-                                                  );
-                                                  selectedRole =
-                                                      [
-                                                            '딜러',
-                                                            '서포터',
-                                                            '컨트롤러',
-                                                          ].contains(data['role'])
-                                                          ? data['role']
-                                                          : null;
-                                                  // Update local copies
-                                                  localElement = selectedElement;
-                                                  localType = selectedType;
-                                                  localRole = selectedRole;
-
-                                                  final skills =
-                                                      data['skills'] ?? {};
-                                                  normalSkillNameController.text =
-                                                      skills['normalSkill']?['name'] ??
-                                                      '';
-                                                  normalSkillTypeController.text =
-                                                      skills['normalSkill']?['type'] ??
-                                                      '';
-                                                  normalSkillApController.text =
-                                                      skills['normalSkill']?['ap'] ??
-                                                      '';
-                                                  normalSkillDescController.text =
-                                                      skills['normalSkill']?['description'] ??
-                                                      '';
-
-                                                  mainSkillNameController.text =
-                                                      skills['mainSkill']?['name'] ??
-                                                      '';
-                                                  mainSkillTypeController.text =
-                                                      skills['mainSkill']?['type'] ??
-                                                      '';
-                                                  mainSkillApController.text =
-                                                      skills['mainSkill']?['ap'] ??
-                                                      '';
-                                                  mainSkillDescController.text =
-                                                      skills['mainSkill']?['description'] ??
-                                                      '';
-                                                  // Populate mainSubSkillControllers from mainSkill['subSkills']
-                                                  final subSkills = skills['mainSkill']?['subSkills'];
-                                                  mainSubSkillControllers.clear();
-                                                  if (subSkills is List) {
-                                                    for (final sub in subSkills) {
-                                                      final name = TextEditingController(text: sub['name'] ?? '');
-                                                      final type = TextEditingController(text: sub['type'] ?? '');
-                                                      final ap = TextEditingController(text: sub['ap'] ?? '');
-                                                      final desc = TextEditingController(text: sub['description'] ?? '');
-                                                      mainSubSkillControllers.add({
-                                                        'name': name,
-                                                        'type': type,
-                                                        'ap': ap,
-                                                        'description': desc,
-                                                      });
-                                                    }
-                                                  }
-
-                                                  subSkillNameController.text =
-                                                      skills['subSkill']?['name'] ??
-                                                      '';
-                                                  subSkillTypeController.text =
-                                                      skills['subSkill']?['type'] ??
-                                                      '';
-                                                  subSkillApController.text =
-                                                      skills['subSkill']?['ap'] ??
-                                                      '';
-                                                  subSkillDescController.text =
-                                                      skills['subSkill']?['description'] ??
-                                                      '';
-
-                                                  passiveSkillNameController.text =
-                                                      skills['passiveSkill']?['name'] ??
-                                                      '';
-                                                  passiveSkillDescController.text =
-                                                      skills['passiveSkill']?['description'] ??
-                                                      '';
-
-                                                  exclusiveEffectController.text =
-                                                      data['exclusiveCore']?['exclusiveEffect'] ??
-                                                      '';
-                                                  suitableEffectController.text =
-                                                      data['exclusiveCore']?['suitableEffect'] ??
-                                                      '';
-
-                                                  final bt =
-                                                      data['breakthrough'] ?? {};
-                                                  for (int i = 0; i < 6; i++) {
-                                                    breakthroughEffects[i].text =
-                                                        bt['${i + 1}']?['effect'] ??
-                                                        '';
-                                                    breakthroughStats[i].text =
-                                                        bt['${i + 1}']?['statsBoost'] ??
-                                                        '';
-                                                    breakthroughSkillIndexes[i] =
-                                                        bt['${i + 1}']?['skillIndex'];
-                                                  }
-                                                });
-                                              });
-                                            });
+                                            _importScriptJson();
+                                            Navigator.of(context).pop();
                                           },
                                         ),
                                         const SizedBox(height: 12),
@@ -1132,19 +1002,13 @@ class _DigimonRegistrationScreenState extends State<DigimonRegistrationScreen> {
                       final scriptBytes = utf8.encode(_generatedScriptJson ?? '{}');
                       final scriptB64 = base64Encode(scriptBytes);
 
-                      final scriptRes = await html.HttpRequest.request(
-                        'https://digimon-pusher.onrender.com/push',
-                        method: 'POST',
-                        requestHeaders: {'Content-Type': 'application/json'},
-                        sendData: jsonEncode({
-                          'filename': 'script.json',
-                          'repo': 'digimon-codex-kr',
-                          'folder': folderName,
-                          'content_base64': scriptB64,
-                        }),
-                      );
-
-                      if (scriptRes.status != 200) {
+                      try {
+                        await uploadToServer(
+                          filename: 'script.json',
+                          folder: folderName,
+                          base64Data: scriptB64,
+                        );
+                      } catch (e) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text("script.json 업로드 실패")),
                         );
@@ -1153,31 +1017,19 @@ class _DigimonRegistrationScreenState extends State<DigimonRegistrationScreen> {
 
                       // Upload illustration
                       final illustB64 = base64Encode(_illustration!);
-                      await html.HttpRequest.request(
-                        'https://digimon-pusher.onrender.com/push',
-                        method: 'POST',
-                        requestHeaders: {'Content-Type': 'application/json'},
-                        sendData: jsonEncode({
-                          'filename': 'illustration.png',
-                          'repo': 'digimon-codex-kr',
-                          'folder': folderName,
-                          'content_base64': illustB64,
-                        }),
+                      await uploadToServer(
+                        filename: 'illustration.png',
+                        folder: folderName,
+                        base64Data: illustB64,
                       );
 
                       // Upload skill images
                       for (final entry in _skillImageMap.entries) {
                         final b64 = base64Encode(entry.value);
-                        await html.HttpRequest.request(
-                          'https://digimon-pusher.onrender.com/push',
-                          method: 'POST',
-                          requestHeaders: {'Content-Type': 'application/json'},
-                          sendData: jsonEncode({
-                            'filename': entry.key,
-                            'repo': 'digimon-codex-kr',
-                            'folder': folderName,
-                            'content_base64': b64,
-                          }),
+                        await uploadToServer(
+                          filename: entry.key,
+                          folder: folderName,
+                          base64Data: b64,
                         );
                       }
 
