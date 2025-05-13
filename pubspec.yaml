@@ -70,6 +70,7 @@ flutter:
   assets:
     - assets/
     - assets/icon/
+    - assets/icon/equipment/
     - assets/icon/talents/
     - assets/icon/type/
     - assets/icon/grade/
