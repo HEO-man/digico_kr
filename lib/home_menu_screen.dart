@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_century/rotation_screen.dart';
+import 'battle_effects_screen.dart';
 import 'guides_screen.dart';
 import 'main.dart';
 import 'talents_screen.dart';
@@ -34,6 +35,8 @@ class HomeMenuScreen extends StatelessWidget {
                 _buildMenuButton(context, '특성 찍기', const TalentsScreen()),
                 const SizedBox(height: 20),
                 _buildMenuButton(context, '테이머장비', const EquipmentListScreen()),
+                const SizedBox(height: 20),
+                _buildMenuButton(context, '전투 효과', /*여기 효과 정보*/const BattleEffectsScreen()),
               ],
             ),
           ),
