@@ -21,6 +21,16 @@ class MyApp extends StatelessWidget {
       title: 'Digimon Codex',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        tooltipTheme: TooltipThemeData(
+          textStyle: TextStyle(fontSize: 14, color: Colors.white),
+          decoration: BoxDecoration(
+            color: Colors.black87,
+            borderRadius: BorderRadius.circular(6),
+          ),
+          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          waitDuration: Duration(milliseconds: 300),
+          showDuration: Duration(seconds: 5),
+        ),
       ),
       routes: {
         '/digimon_registration': (context) => const DigimonRegistrationScreen(),
@@ -564,6 +574,9 @@ class DigimonDetailScreen extends StatefulWidget {
 class _DigimonDetailScreenState extends State<DigimonDetailScreen> {
   int selectedBreakthrough = 0;
 
+  // 전투효과 데이터: 이름별 Map
+  Map<String, Map<String, dynamic>> battleEffectsByName = {};
+
   // Helper to normalize subSkills to a List<Map<String, dynamic>>
   List<Map<String, dynamic>> _normalizeSubSkills(dynamic subSkills) {
     if (subSkills is List) {
@@ -575,6 +588,123 @@ class _DigimonDetailScreenState extends State<DigimonDetailScreen> {
     } else {
       return [];
     }
+  }
+
+  Future<void> _loadBattleEffects() async {
+    final List<String> sources = [
+      'https://heo-man.github.io/digimon-codex-kr/data/effects/battle_buff.json',
+      'https://heo-man.github.io/digimon-codex-kr/data/effects/battle_debuff.json',
+      'https://heo-man.github.io/digimon-codex-kr/data/effects/battle_control.json',
+      'https://heo-man.github.io/digimon-codex-kr/data/weather/weather_script.json',
+    ];
+
+    for (final url in sources) {
+      final res = await http.get(Uri.parse(url));
+      if (res.statusCode == 200) {
+        final jsonMap = json.decode(res.body) as Map<String, dynamic>;
+        for (final entry in jsonMap.entries) {
+          final data = entry.value as Map<String, dynamic>;
+          final keyName = data['name'];
+          if (keyName != null) {
+            battleEffectsByName[keyName] = data;
+          }
+        }
+      }
+    }
+  }
+
+  // 전투효과 이름을 일반 단어 매칭으로 추출
+  List<String> extractEffectNamesFromText(String text) {
+    final List<String> matched = [];
+    final words = text.split(RegExp(r'[\s,.!?()\[\]{}"“”]+')); // 단어 구분자 기준 분리
+
+    for (final name in battleEffectsByName.keys) {
+      if (name == '비') {
+        // '비'가 단독으로 등장했을 때만 인식
+        if (words.contains('비')) {
+          matched.add(name);
+        }
+      } else if (text.contains(name)) {
+        matched.add(name);
+      }
+    }
+
+    return matched.toSet().toList();
+  }
+
+  // 스킬 설명에서 전투효과명을 RichText로 하이라이트 및 Tooltip 처리
+  Widget buildEffectRichText(String description) {
+    final effectNames = battleEffectsByName.keys.toList();
+    final spans = <InlineSpan>[];
+    int currentIndex = 0;
+    final matches = <Map<String, dynamic>>[];
+    // Build a combined RegExp for all effect names, allowing Korean particles after
+    for (final effectName in effectNames) {
+      // r'\b' + RegExp.escape(effectName) + r'(을|를|이|가|에|은|는|과|와|이나|나)?\b'
+      final pattern = RegExp(r'(^|[^가-힣A-Za-z0-9])' + RegExp.escape(effectName) + r'(을|를|이|가|에|은|는|과|와|이나|나)?(?![가-힣])');
+
+      for (final match in pattern.allMatches(description)) {
+        matches.add({
+          'start': match.start,
+          'end': match.end,
+          'effectName': effectName,
+          'matchedText': match.group(0),
+        });
+      }
+    }
+    // Sort matches by start index
+    matches.sort((a, b) => a['start'].compareTo(b['start']));
+    int lastIndex = 0;
+    for (final match in matches) {
+      if (match['start'] >= lastIndex) {
+        // Add text before match
+        if (match['start'] > lastIndex) {
+          spans.add(TextSpan(
+            text: description.substring(lastIndex, match['start']),
+            style: const TextStyle(color: Colors.black),
+          ));
+        }
+        final effect = battleEffectsByName[match['effectName']];
+        if (effect != null) {
+          spans.add(WidgetSpan(
+            alignment: PlaceholderAlignment.middle,
+            child: GestureDetector(
+              onTap: () {
+                // Optional: handle tap
+              },
+              child: Tooltip(
+                message: effect['description'] ?? '',
+                preferBelow: false,
+                child: Text(
+                  match['matchedText'],
+                  style: const TextStyle(
+                    color: Colors.deepPurple,
+                    fontWeight: FontWeight.w600,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ),
+            ),
+          ));
+        } else {
+          spans.add(TextSpan(
+            text: match['matchedText'],
+            style: const TextStyle(color: Colors.black),
+          ));
+        }
+        lastIndex = match['end'];
+      }
+    }
+    // Add remaining text
+    if (lastIndex < description.length) {
+      spans.add(TextSpan(
+        text: description.substring(lastIndex),
+        style: const TextStyle(color: Colors.black),
+      ));
+    }
+    return RichText(
+      text: TextSpan(children: spans),
+    );
   }
 
   @override
@@ -759,19 +889,17 @@ class _DigimonDetailScreenState extends State<DigimonDetailScreen> {
                                               ),
                                               const SizedBox(height: 4),
                                               if (!skillHasSubSkills) ...[
-                                                Text(
-                                                  skill['description'] ?? '',
-                                                  style: const TextStyle(fontSize: 15),
-                                                ),
+                                                buildEffectRichText(skill['description'] ?? ''),
                                               ] else ...[
                                                 // mainSkill 정보
-                                                if (skill['mainSkill'] != null)
+                                                if (skill['mainSkill'] != null) ...[
                                                   Text(
                                                     '${skill['mainSkill']['name'] ?? ''}'
-                                                    '${skill['mainSkill']['ap'] != null && skill['mainSkill']['ap'].toString().isNotEmpty ? ' (${skill['mainSkill']['ap']})' : ''}'
-                                                    '\n${skill['mainSkill']['description'] ?? ''}',
+                                                    '${skill['mainSkill']['ap'] != null && skill['mainSkill']['ap'].toString().isNotEmpty ? ' (${skill['mainSkill']['ap']})' : ''}',
                                                     style: const TextStyle(fontSize: 15),
                                                   ),
+                                                  buildEffectRichText(skill['mainSkill']['description'] ?? ''),
+                                                ],
                                                 const SizedBox(height: 8),
                                                 // subSkills 반복
                                                 for (int j = 0; j < subSkills.length; j++) ...[
@@ -793,11 +921,17 @@ class _DigimonDetailScreenState extends State<DigimonDetailScreen> {
                                                         if (skillImages is List && skillImages.length > j + 1)
                                                           const SizedBox(width: 8),
                                                         Expanded(
-                                                          child: Text(
-                                                            '${j + 1}. '
-                                                            '${subSkills[j]['ap'] != null ? '(${subSkills[j]['ap']}) ' : ''}'
-                                                            '${subSkills[j]['description'] ?? ''}',
-                                                            style: const TextStyle(fontSize: 15),
+                                                          child: Column(
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            children: [
+                                                              Text(
+                                                                '${j + 1}. '
+                                                                '${subSkills[j]['ap'] != null ? '(${subSkills[j]['ap']}) ' : ''}'
+                                                                '',
+                                                                style: const TextStyle(fontSize: 15),
+                                                              ),
+                                                              buildEffectRichText(subSkills[j]['description'] ?? ''),
+                                                            ],
                                                           ),
                                                         ),
                                                       ],
@@ -985,6 +1119,7 @@ class _DigimonDetailScreenState extends State<DigimonDetailScreen> {
         if (!script.containsKey('breakthrough') || script['breakthrough'] is! Map<String, dynamic>) {
           script['breakthrough'] = null;
         }
+        await _loadBattleEffects();
         return script;
       } else {
         debugPrint('HTTP 오류: ${response.statusCode}');
