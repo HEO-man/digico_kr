@@ -409,7 +409,7 @@ class _DigimonListScreenState extends State<DigimonListScreen> {
                             fit: BoxFit.cover,
                             errorBuilder: (context, error, stackTrace) {
                               return Image.network(
-                                'https://HEO-man.github.io/digimon-codex-kr/data/digi_illustration/${digimon.folderName}/${digimon.folderName}_ilst.png',
+                                'https://HEO-man.github.io/digimon-codex-kr/data/digi_illustration/${digimon.folderName}/ilst.png',
                                 width: 56,
                                 height: 56,
                                 fit: BoxFit.cover,
@@ -765,7 +765,7 @@ class _DigimonDetailScreenState extends State<DigimonDetailScreen> {
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) {
                         return Image.network(
-                          'https://HEO-man.github.io/digimon-codex-kr/data/digi_illustration/${widget.digimon.folderName}/${widget.digimon.folderName}_ilst.png',
+                          'https://HEO-man.github.io/digimon-codex-kr/data/digi_illustration/${widget.digimon.folderName}/ilst.png',
                           fit: BoxFit.cover,
                           errorBuilder: (context, error, stackTrace) {
                             return Image.asset(

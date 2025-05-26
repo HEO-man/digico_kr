@@ -4,11 +4,16 @@ import 'package:image/image.dart' as img;
 //import 'dart:html' as html;
 import 'web_import.dart' if (dart.library.io) 'stub_import.dart';
 import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
+import 'digimon_utils.dart';
+import 'digimon_list_screen.dart';
 
 class DigimonRegistrationScreen extends StatefulWidget {
-  const DigimonRegistrationScreen({super.key});
+  final String? existingScriptUrl;
+
+  const DigimonRegistrationScreen({this.existingScriptUrl, super.key});
 
   @override
   State<DigimonRegistrationScreen> createState() =>
@@ -84,8 +89,8 @@ class _DigimonRegistrationScreenState extends State<DigimonRegistrationScreen> {
       final data = json.decode(jsonStr);
       setState(() {
         nameController.text = data['name'] ?? '';
-        selectedElement = _matchElement(data['element']);
-        selectedType = _matchType(data['type']);
+        selectedElement = matchElement(data['element']);
+        selectedType = matchElement(data['type']);
         selectedRole =
             ['딜러', '서포터', '컨트롤러'].contains(data['role'])
                 ? data['role']
@@ -233,7 +238,21 @@ class _DigimonRegistrationScreenState extends State<DigimonRegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('디지몬 등록')),
+      appBar: AppBar(
+        title: const Text('디지몬 등록'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.folder_open),
+            tooltip: '디지몬 불러오기',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const DigimonListScreen()),
+              );
+            },
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -477,7 +496,7 @@ class _DigimonRegistrationScreenState extends State<DigimonRegistrationScreen> {
                                                       child: Row(
                                                         children: [
                                                           Image.asset(
-                                                            'assets/icon/element/ic_${_elementKey(e)}.png',
+                                                            'assets/icon/element/ic_${elementKey(e)}.png',
                                                             width: 20,
                                                             height: 20,
                                                           ),
@@ -507,7 +526,7 @@ class _DigimonRegistrationScreenState extends State<DigimonRegistrationScreen> {
                                                   child: Row(
                                                     children: [
                                                       Image.asset(
-                                                        'assets/icon/type/${_typeKey(e)}.png',
+                                                        'assets/icon/type/${typeKey(e)}.png',
                                                         width: 20,
                                                         height: 20,
                                                       ),
@@ -592,7 +611,7 @@ class _DigimonRegistrationScreenState extends State<DigimonRegistrationScreen> {
                                         TextField(
                                           controller: normalSkillDescController,
                                           decoration: const InputDecoration(labelText: '설명'),
-                                          maxLines: 2,
+                                          maxLines: 5,
                                         ),
                                         const SizedBox(height: 20),
                                         Row(
@@ -640,7 +659,7 @@ class _DigimonRegistrationScreenState extends State<DigimonRegistrationScreen> {
                                         TextField(
                                           controller: mainSkillDescController,
                                           decoration: const InputDecoration(labelText: '설명'),
-                                          maxLines: 2,
+                                          maxLines: 5,
                                         ),
                                         const SizedBox(height: 6),
                                         Row(
@@ -731,7 +750,7 @@ class _DigimonRegistrationScreenState extends State<DigimonRegistrationScreen> {
                                                       TextField(
                                                         controller: mainSubSkillControllers[i]['description'],
                                                         decoration: const InputDecoration(labelText: '설명'),
-                                                        maxLines: 2,
+                                                        maxLines: 5,
                                                       ),
                                                     ],
                                                   ),
@@ -785,7 +804,7 @@ class _DigimonRegistrationScreenState extends State<DigimonRegistrationScreen> {
                                         TextField(
                                           controller: subSkillDescController,
                                           decoration: const InputDecoration(labelText: '설명'),
-                                          maxLines: 2,
+                                          maxLines: 5,
                                         ),
                                         const SizedBox(height: 20),
                                         Row(
@@ -823,7 +842,7 @@ class _DigimonRegistrationScreenState extends State<DigimonRegistrationScreen> {
                                         TextField(
                                           controller: passiveSkillDescController,
                                           decoration: const InputDecoration(labelText: '설명'),
-                                          maxLines: 2,
+                                          maxLines: 5,
                                         ),
                                         const SizedBox(height: 20),
                                         const Text(
@@ -861,7 +880,7 @@ class _DigimonRegistrationScreenState extends State<DigimonRegistrationScreen> {
                                                     TextField(
                                                       controller: breakthroughEffects[i],
                                                       decoration: const InputDecoration(labelText: '효과 설명'),
-                                                      maxLines: 2,
+                                                      maxLines: 1,
                                                     ),
                                                     const SizedBox(height: 6),
                                                     TextField(
@@ -955,87 +974,115 @@ class _DigimonRegistrationScreenState extends State<DigimonRegistrationScreen> {
                 children: [
                   ElevatedButton(
                     onPressed: () async {
-                      if (nameController.text.trim().isEmpty) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("디지몬 이름을 입력해주세요.")),
-                        );
-                        return;
-                      }
-                      if (_illustration == null) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("일러스트를 업로드해주세요.")),
-                        );
-                        return;
-                      }
-                      if (_skillImageMap.isEmpty) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("스킬 이미지를 업로드해주세요.")),
-                        );
-                        return;
-                      }
-                      if ([
-                        normalSkillNameController.text,
-                        normalSkillTypeController.text,
-                        normalSkillDescController.text,
-                        mainSkillNameController.text,
-                        mainSkillTypeController.text,
-                        mainSkillDescController.text,
-                        subSkillNameController.text,
-                        subSkillTypeController.text,
-                        subSkillDescController.text,
-                        passiveSkillNameController.text,
-                        passiveSkillDescController.text,
-                        exclusiveEffectController.text,
-                        suitableEffectController.text,
-                        ...breakthroughEffects.map((c) => c.text),
-                        ...breakthroughStats.map((c) => c.text),
-                      ].any((text) => text.trim().isEmpty)) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("스킬 정보 및 효과 항목을 모두 입력해주세요.")),
-                        );
-                        return;
-                      }
-
-                      final folderName = nameController.text.trim();
-
-                      // Upload script.json
-                      final scriptBytes = utf8.encode(_generatedScriptJson ?? '{}');
-                      final scriptB64 = base64Encode(scriptBytes);
-
+                      bool loadingShown = false;
                       try {
-                        await uploadToServer(
-                          filename: 'script.json',
-                          folder: folderName,
-                          base64Data: scriptB64,
+                        // Show progress dialog before validation
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (_) => const Center(child: CircularProgressIndicator()),
+                        );
+                        loadingShown = true;
+
+                        if (nameController.text.trim().isEmpty) {
+                          if (loadingShown) Navigator.of(context).pop();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text("디지몬 이름을 입력해주세요.")),
+                          );
+                          return;
+                        }
+                        if (_illustration == null && widget.existingScriptUrl == null) {
+                          if (loadingShown) Navigator.of(context).pop();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text("일러스트를 업로드해주세요.")),
+                          );
+                          return;
+                        }
+                        if (_skillImageMap.isEmpty && widget.existingScriptUrl == null) {
+                          if (loadingShown) Navigator.of(context).pop();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text("스킬 이미지를 업로드해주세요.")),
+                          );
+                          return;
+                        }
+                        if ([
+                          normalSkillNameController.text,
+                          normalSkillTypeController.text,
+                          normalSkillDescController.text,
+                          mainSkillNameController.text,
+                          mainSkillTypeController.text,
+                          mainSkillDescController.text,
+                          subSkillNameController.text,
+                          subSkillTypeController.text,
+                          subSkillDescController.text,
+                          passiveSkillNameController.text,
+                          passiveSkillDescController.text,
+                          exclusiveEffectController.text,
+                          suitableEffectController.text,
+                          ...breakthroughEffects.map((c) => c.text),
+                          ...breakthroughStats.map((c) => c.text),
+                        ].any((text) => text.trim().isEmpty)) {
+                          if (loadingShown) Navigator.of(context).pop();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text("스킬 정보 및 효과 항목을 모두 입력해주세요.")),
+                          );
+                          return;
+                        }
+
+                        final folderName = nameController.text.trim();
+
+                        // Upload script.json
+                        final scriptBytes = utf8.encode(_generatedScriptJson ?? '{}');
+                        final scriptB64 = base64Encode(scriptBytes);
+
+                        try {
+                          await uploadToServer(
+                            filename: 'script.json',
+                            folder: folderName,
+                            base64Data: scriptB64,
+                          );
+                        } catch (e) {
+                          if (loadingShown) Navigator.of(context).pop();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text("script.json 업로드 실패")),
+                          );
+                          return;
+                        }
+
+                        // Upload illustration conditionally
+                        if (_illustration != null) {
+                          final illustB64 = base64Encode(_illustration!);
+                          await uploadToServer(
+                            filename: 'illustration.png',
+                            folder: folderName,
+                            base64Data: illustB64,
+                          );
+                        }
+
+                        // Upload skill images conditionally
+                        if (_skillImageMap.isNotEmpty) {
+                          for (final entry in _skillImageMap.entries) {
+                            final b64 = base64Encode(entry.value);
+                            await uploadToServer(
+                              filename: entry.key,
+                              folder: folderName,
+                              base64Data: b64,
+                            );
+                          }
+                        }
+
+                        if (loadingShown) Navigator.of(context).pop(); // close progress dialog
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text("디지몬 등록이 완료되었습니다.")),
+                        );
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (_) => const DigimonListScreen()),
                         );
                       } catch (e) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("script.json 업로드 실패")),
-                        );
-                        return;
+                        if (loadingShown) Navigator.of(context).pop();
+                        // Optional: show error message if not already handled
                       }
-
-                      // Upload illustration
-                      final illustB64 = base64Encode(_illustration!);
-                      await uploadToServer(
-                        filename: 'illustration.png',
-                        folder: folderName,
-                        base64Data: illustB64,
-                      );
-
-                      // Upload skill images
-                      for (final entry in _skillImageMap.entries) {
-                        final b64 = base64Encode(entry.value);
-                        await uploadToServer(
-                          filename: entry.key,
-                          folder: folderName,
-                          base64Data: b64,
-                        );
-                      }
-
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text("디지몬 등록이 완료되었습니다.")),
-                      );
                     },
                     child: const Text("디지몬 등록 완료"),
                   ),
@@ -1052,90 +1099,75 @@ class _DigimonRegistrationScreenState extends State<DigimonRegistrationScreen> {
   }
 
   // _saveScriptJson 함수는 더 이상 사용되지 않습니다.
-}
 
-String _elementKey(String e) {
-  switch (e) {
-    case '불':
-      return 'fire';
-    case '물':
-      return 'water';
-    case '풀':
-      return 'nature';
-    case '땅':
-      return 'earth';
-    case '바람':
-      return 'wind';
-    case '전기':
-      return 'thunder';
-    case '빛':
-      return 'light';
-    case '어둠':
-      return 'dark';
-    default:
-      return 'unknown';
+  @override
+  void initState() {
+    super.initState();
+    if (widget.existingScriptUrl != null) {
+      _loadScriptFromUrl(widget.existingScriptUrl!);
+    }
   }
-}
 
-String _typeKey(String type) {
-  switch (type) {
-    case '백신':
-      return 'ic_vaccine';
-    case '바이러스':
-      return 'ic_virus';
-    case '데이터':
-      return 'ic_data';
-    default:
-      return 'unknown';
-  }
-}
+  Future<void> _loadScriptFromUrl(String url) async {
+    try {
+      final res = await http.get(Uri.parse(url));
+      if (res.statusCode == 200) {
+        final data = json.decode(res.body);
+        setState(() {
+          nameController.text = data['name'] ?? '';
+          selectedElement = matchElement(data['element']);
+          selectedType = matchType(data['type']);
+          selectedRole = ['딜러', '서포터', '컨트롤러'].contains(data['role']) ? data['role'] : null;
 
-String? _matchElement(String? value) {
-  switch (value?.toLowerCase()) {
-    case '불':
-    case 'fire':
-      return '불';
-    case '물':
-    case 'water':
-      return '물';
-    case '풀':
-    case 'plant':
-    case 'nature':
-      return '풀';
-    case '땅':
-    case 'earth':
-      return '땅';
-    case '바람':
-    case 'wind':
-      return '바람';
-    case '전기':
-    case 'thunder':
-    case 'electric':
-      return '전기';
-    case '빛':
-    case 'light':
-      return '빛';
-    case '어둠':
-    case 'dark':
-      return '어둠';
-    default:
-      return null;
-  }
-}
+          final skills = data['skills'] ?? {};
+          normalSkillNameController.text = skills['normalSkill']?['name'] ?? '';
+          normalSkillTypeController.text = skills['normalSkill']?['type'] ?? '';
+          normalSkillApController.text = skills['normalSkill']?['ap'] ?? '';
+          normalSkillDescController.text = skills['normalSkill']?['description'] ?? '';
 
-String? _matchType(String? value) {
-  switch (value?.toLowerCase()) {
-    case '백신':
-    case 'vaccine':
-      return '백신';
-    case '바이러스':
-    case 'virus':
-      return '바이러스';
-    case '데이터':
-    case 'data':
-      return '데이터';
-    default:
-      return null;
+          mainSkillNameController.text = skills['mainSkill']?['name'] ?? '';
+          mainSkillTypeController.text = skills['mainSkill']?['type'] ?? '';
+          mainSkillApController.text = skills['mainSkill']?['ap'] ?? '';
+          mainSkillDescController.text = skills['mainSkill']?['description'] ?? '';
+          final subSkills = skills['mainSkill']?['subSkills'];
+          mainSubSkillControllers.clear();
+          if (subSkills is List) {
+            for (final sub in subSkills) {
+              final name = TextEditingController(text: sub['name'] ?? '');
+              final type = TextEditingController(text: sub['type'] ?? '');
+              final ap = TextEditingController(text: sub['ap'] ?? '');
+              final desc = TextEditingController(text: sub['description'] ?? '');
+              mainSubSkillControllers.add({
+                'name': name,
+                'type': type,
+                'ap': ap,
+                'description': desc,
+              });
+            }
+          }
+
+          subSkillNameController.text = skills['subSkill']?['name'] ?? '';
+          subSkillTypeController.text = skills['subSkill']?['type'] ?? '';
+          subSkillApController.text = skills['subSkill']?['ap'] ?? '';
+          subSkillDescController.text = skills['subSkill']?['description'] ?? '';
+
+          passiveSkillNameController.text = skills['passiveSkill']?['name'] ?? '';
+          passiveSkillDescController.text = skills['passiveSkill']?['description'] ?? '';
+
+          exclusiveEffectController.text = data['exclusiveCore']?['exclusiveEffect'] ?? '';
+          suitableEffectController.text = data['exclusiveCore']?['suitableEffect'] ?? '';
+
+          final bt = data['breakthrough'] ?? {};
+          for (int i = 0; i < 6; i++) {
+            breakthroughEffects[i].text = bt['${i + 1}']?['effect'] ?? '';
+            breakthroughStats[i].text = bt['${i + 1}']?['statsBoost'] ?? '';
+            breakthroughSkillIndexes[i] = bt['${i + 1}']?['skillIndex'];
+          }
+        });
+      }
+    } catch (e) {
+      debugPrint('불러오기 실패: $e');
+    }
   }
 }
 

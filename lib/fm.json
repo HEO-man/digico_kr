@@ -1,0 +1,452 @@
+[
+  {
+    "name": "나타몬",
+    "element": "불",
+    "type": "데이터",
+    "role": "서포터",
+    "folderName": "나타몬",
+    "folderUrl": "%EB%82%98%ED%83%80%EB%AA%AC",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "나타몬 CM",
+    "element": "불",
+    "type": "데이터",
+    "role": "딜러",
+    "folderName": "나타몬 CM",
+    "folderUrl": "%EB%82%98%ED%83%80%EB%AA%AC%20CM",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "다크니스바그라몬",
+    "element": "어둠",
+    "type": "바이러스",
+    "role": "딜러",
+    "folderName": "다크니스바그라몬",
+    "folderUrl": "%EB%8B%A4%ED%81%AC%EB%8B%88%EC%8A%A4%EB%B0%94%EA%B7%B8%EB%9D%BC%EB%AA%AC",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "라센몬 FM",
+    "element": "풀",
+    "type": "데이터",
+    "role": "딜러",
+    "folderName": "라센몬 FM",
+    "folderUrl": "%EB%9D%BC%EC%84%BC%EB%AA%AC%20FM",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "로드나이트몬 X",
+    "element": "바람",
+    "type": "바이러스",
+    "role": "딜러",
+    "folderName": "로드나이트몬 X",
+    "folderUrl": "%EB%A1%9C%EB%93%9C%EB%82%98%EC%9D%B4%ED%8A%B8%EB%AA%AC%20X",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "로제몬 X",
+    "element": "풀",
+    "type": "데이터",
+    "role": "서포터",
+    "folderName": "로제몬 X",
+    "folderUrl": "%EB%A1%9C%EC%A0%9C%EB%AA%AC%20X",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "루체몬",
+    "element": "빛",
+    "type": "백신",
+    "role": "딜러",
+    "folderName": "루체몬",
+    "folderUrl": "%EB%A3%A8%EC%B2%B4%EB%AA%AC",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "루체몬 SM",
+    "element": "어둠",
+    "type": "바이러스",
+    "role": "컨트롤러",
+    "folderName": "루체몬 SM",
+    "folderUrl": "%EB%A3%A8%EC%B2%B4%EB%AA%AC%20SM",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "루체몬 X",
+    "element": "빛",
+    "type": "바이러스",
+    "role": "컨트롤러",
+    "folderName": "루체몬 X",
+    "folderUrl": "%EB%A3%A8%EC%B2%B4%EB%AA%AC%20X",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "매그너몬 X",
+    "element": "빛",
+    "type": "백신",
+    "role": "서포터",
+    "folderName": "매그너몬 X",
+    "folderUrl": "%EB%A7%A4%EA%B7%B8%EB%84%88%EB%AA%AC%20X",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "메기드라몬 X",
+    "element": "불",
+    "type": "바이러스",
+    "role": "서포터",
+    "folderName": "메기드라몬 X",
+    "folderUrl": "%EB%A9%94%EA%B8%B0%EB%93%9C%EB%9D%BC%EB%AA%AC%20X",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "메탈가루루몬 X",
+    "element": "물",
+    "type": "데이터",
+    "role": "서포터",
+    "folderName": "메탈가루루몬 X",
+    "folderUrl": "%EB%A9%94%ED%83%88%EA%B0%80%EB%A3%A8%EB%A3%A8%EB%AA%AC%20X",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "미네르바몬 X",
+    "element": "풀",
+    "type": "바이러스",
+    "role": "딜러",
+    "folderName": "미네르바몬 X",
+    "folderUrl": "%EB%AF%B8%EB%84%A4%EB%A5%B4%EB%B0%94%EB%AA%AC%20X",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "바그라몬",
+    "element": "어둠",
+    "type": "바이러스",
+    "role": "컨트롤러",
+    "folderName": "바그라몬",
+    "folderUrl": "%EB%B0%94%EA%B7%B8%EB%9D%BC%EB%AA%AC",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "블룸로드몬",
+    "element": "풀",
+    "type": "백신",
+    "role": "딜러",
+    "folderName": "블룸로드몬",
+    "folderUrl": "%EB%B8%94%EB%A3%B8%EB%A1%9C%EB%93%9C%EB%AA%AC",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "사쿠야몬 X",
+    "element": "땅",
+    "type": "데이터",
+    "role": "서포터",
+    "folderName": "사쿠야몬 X",
+    "folderUrl": "%EC%82%AC%EC%BF%A0%EC%95%BC%EB%AA%AC%20X",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "상드리몬",
+    "element": "물",
+    "type": "바이러스",
+    "role": "컨트롤러",
+    "folderName": "상드리몬",
+    "folderUrl": "%EC%83%81%EB%93%9C%EB%A6%AC%EB%AA%AC",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "상아몬",
+    "element": "풀",
+    "type": "백신",
+    "role": "딜러",
+    "folderName": "상아몬",
+    "folderUrl": "%EC%83%81%EC%95%84%EB%AA%AC",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "샤가라몬",
+    "element": "물",
+    "type": "데이터",
+    "role": "서포터",
+    "folderName": "샤가라몬",
+    "folderUrl": "%EC%83%A4%EA%B0%80%EB%9D%BC%EB%AA%AC",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "샤우트몬 X7",
+    "element": "불",
+    "type": "데이터",
+    "role": "딜러",
+    "folderName": "샤우트몬 X7",
+    "folderUrl": "%EC%83%A4%EC%9A%B0%ED%8A%B8%EB%AA%AC%20X7",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "샤우트몬 X7 SM",
+    "element": "빛",
+    "type": "백신",
+    "role": "딜러",
+    "folderName": "샤우트몬 X7 SM",
+    "folderUrl": "%EC%83%A4%EC%9A%B0%ED%8A%B8%EB%AA%AC%20X7%20SM",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "슬레이프몬 X",
+    "element": "바람",
+    "type": "백신",
+    "role": "서포터",
+    "folderName": "슬레이프몬 X",
+    "folderUrl": "%EC%8A%AC%EB%A0%88%EC%9D%B4%ED%94%84%EB%AA%AC%20X",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "아구몬 BB (용기의 유대)",
+    "element": "불",
+    "type": "백신",
+    "role": "딜러",
+    "folderName": "아구몬 BB (용기의 유대)",
+    "folderUrl": "%EC%95%84%EA%B5%AC%EB%AA%AC%20BB%20%28%EC%9A%A9%EA%B8%B0%EC%9D%98%20%EC%9C%A0%EB%8C%80%29",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "아포카리몬",
+    "element": "어둠",
+    "type": "바이러스",
+    "role": "딜러",
+    "folderName": "아포카리몬",
+    "folderUrl": "%EC%95%84%ED%8F%AC%EC%B9%B4%EB%A6%AC%EB%AA%AC",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "알파몬 왕룡검",
+    "element": "빛",
+    "type": "백신",
+    "role": "딜러",
+    "folderName": "알파몬 왕룡검",
+    "folderUrl": "%EC%95%8C%ED%8C%8C%EB%AA%AC%20%EC%99%95%EB%A3%A1%EA%B2%80",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "알포스브이드라몬 X",
+    "element": "바람",
+    "type": "백신",
+    "role": "딜러",
+    "folderName": "알포스브이드라몬 X",
+    "folderUrl": "%EC%95%8C%ED%8F%AC%EC%8A%A4%EB%B8%8C%EC%9D%B4%EB%93%9C%EB%9D%BC%EB%AA%AC%20X",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "에오스몬",
+    "element": "풀",
+    "type": "데이터",
+    "role": "서포터",
+    "folderName": "에오스몬",
+    "folderUrl": "%EC%97%90%EC%98%A4%EC%8A%A4%EB%AA%AC",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "오르디네몬",
+    "element": "어둠",
+    "type": "바이러스",
+    "role": "딜러",
+    "folderName": "오르디네몬",
+    "folderUrl": "%EC%98%A4%EB%A5%B4%EB%94%94%EB%84%A4%EB%AA%AC",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "오메가몬 MMˢᵖ",
+    "element": "물",
+    "type": "백신",
+    "role": "딜러",
+    "folderName": "오메가몬 MMˢᵖ",
+    "folderUrl": "%EC%98%A4%EB%A9%94%EA%B0%80%EB%AA%AC%20MM%CB%A2%E1%B5%96",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "오메가몬 X",
+    "element": "빛",
+    "type": "백신",
+    "role": "딜러",
+    "folderName": "오메가몬 X",
+    "folderUrl": "%EC%98%A4%EB%A9%94%EA%B0%80%EB%AA%AC%20X",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "오메가몬ˢᵖ",
+    "element": "빛",
+    "type": "백신",
+    "role": "딜러",
+    "folderName": "오메가몬ˢᵖ",
+    "folderUrl": "%EC%98%A4%EB%A9%94%EA%B0%80%EB%AA%AC%CB%A2%E1%B5%96",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "오파니몬 FMX",
+    "element": "어둠",
+    "type": "바이러스",
+    "role": "딜러",
+    "folderName": "오파니몬 FMX",
+    "folderUrl": "%EC%98%A4%ED%8C%8C%EB%8B%88%EB%AA%AC%20FMX",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "오파니몬 X",
+    "element": "빛",
+    "type": "백신",
+    "role": "서포터",
+    "folderName": "오파니몬 X",
+    "folderUrl": "%EC%98%A4%ED%8C%8C%EB%8B%88%EB%AA%AC%20X",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "워그레이몬 X",
+    "element": "불",
+    "type": "백신",
+    "role": "딜러",
+    "folderName": "워그레이몬 X",
+    "folderUrl": "%EC%9B%8C%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%AA%AC%20X",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "이랑몬",
+    "element": "빛",
+    "type": "백신",
+    "role": "딜러",
+    "folderName": "이랑몬",
+    "folderUrl": "%EC%9D%B4%EB%9E%91%EB%AA%AC",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "이랑몬 BM",
+    "element": "바람",
+    "type": "백신",
+    "role": "딜러",
+    "folderName": "이랑몬 BM",
+    "folderUrl": "%EC%9D%B4%EB%9E%91%EB%AA%AC%20BM",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "퀘츠몬",
+    "element": "전기",
+    "type": "바이러스",
+    "role": "딜러",
+    "folderName": "퀘츠몬",
+    "folderUrl": "%ED%80%98%EC%B8%A0%EB%AA%AC",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "타쿠토우몬",
+    "element": "물",
+    "type": "백신",
+    "role": "서포터",
+    "folderName": "타쿠토우몬",
+    "folderUrl": "%ED%83%80%EC%BF%A0%ED%86%A0%EC%9A%B0%EB%AA%AC",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "타쿠토우몬 WM",
+    "element": "번개",
+    "type": "백신",
+    "role": "딜러",
+    "folderName": "타쿠토우몬 WM",
+    "folderUrl": "%ED%83%80%EC%BF%A0%ED%86%A0%EC%9A%B0%EB%AA%AC%20WM",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "파피몬 BF (우정의 유대)",
+    "element": "물",
+    "type": "데이터",
+    "role": "딜러",
+    "folderName": "파피몬 BF (우정의 유대)",
+    "folderUrl": "%ED%8C%8C%ED%94%BC%EB%AA%AC%20BF%20%28%EC%9A%B0%EC%A0%95%EC%9D%98%20%EC%9C%A0%EB%8C%80%29",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "프린스콩알몬 X",
+    "element": "전기",
+    "type": "데이터",
+    "role": "컨트롤러",
+    "folderName": "프린스콩알몬 X",
+    "folderUrl": "%ED%94%84%EB%A6%B0%EC%8A%A4%EC%BD%A9%EC%95%8C%EB%AA%AC%20X",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "플레시오몬 X",
+    "element": "물",
+    "type": "데이터",
+    "role": "서포터",
+    "folderName": "플레시오몬 X",
+    "folderUrl": "%ED%94%8C%EB%A0%88%EC%8B%9C%EC%98%A4%EB%AA%AC%20X",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "황룡몬",
+    "element": "땅",
+    "type": "데이터",
+    "role": "서포터",
+    "folderName": "황룡몬",
+    "folderUrl": "%ED%99%A9%EB%A3%A1%EB%AA%AC",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "황룡몬 RM",
+    "element": "땅",
+    "type": "데이터",
+    "role": "딜러",
+    "folderName": "황룡몬 RM",
+    "folderUrl": "%ED%99%A9%EB%A3%A1%EB%AA%AC%20RM",
+    "grade": 25,
+    "category": "Z진화"
+  },
+  {
+    "name": "황제드라몬 PM",
+    "element": "빛",
+    "type": "백신",
+    "role": "딜러",
+    "folderName": "황제드라몬 PM",
+    "folderUrl": "%ED%99%A9%EC%A0%9C%EB%93%9C%EB%9D%BC%EB%AA%AC%20PM",
+    "grade": 25,
+    "category": "Z진화"
+  }
+]
