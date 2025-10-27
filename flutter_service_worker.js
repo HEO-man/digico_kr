@@ -1,0 +1,445 @@
+'use strict';
+const MANIFEST = 'flutter-app-manifest';
+const TEMP = 'flutter-temp-cache';
+const CACHE_NAME = 'flutter-app-cache';
+
+const RESOURCES = {"flutter_bootstrap.js": "b2f7ef962a7fd7890e6acf0255e5b2f7",
+"version.json": "d3929dae0c8fe6830afae8bcb4389873",
+"index.html": "11213dc66800ab54c2119f7facccbcee",
+"/": "11213dc66800ab54c2119f7facccbcee",
+"main.dart.js": "14bdfcddbc2abcb61837d8c034b8e901",
+"flutter.js": "76f08d47ff9f5715220992f993002504",
+"favicon.png": "fbd3f6863b7c14008ecb622c1f8986bf",
+"icons/Icon-192.png": "fbd3f6863b7c14008ecb622c1f8986bf",
+"icons/Icon-maskable-192.png": "fbd3f6863b7c14008ecb622c1f8986bf",
+"icons/Icon-maskable-512.png": "fbd3f6863b7c14008ecb622c1f8986bf",
+"icons/Icon-512.png": "fbd3f6863b7c14008ecb622c1f8986bf",
+"manifest.json": "322ecce4e79adda8524b3f170fc1bc13",
+"assets/AssetManifest.json": "6992c2e9d92cf6c11a3f2b0efd0fdada",
+"assets/NOTICES": "2c6f7f1656fb3dacb7209c64a60cca8a",
+"assets/FontManifest.json": "dc3d03800ccca4601324923c0b1d6d57",
+"assets/AssetManifest.bin.json": "88f609b1ef7b60a71a5dbecdefeacb2f",
+"assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "33b7d9392238c04c131b6ce224e13711",
+"assets/packages/youtube_player_flutter/assets/speedometer.webp": "50448630e948b5b3998ae5a5d112622b",
+"assets/packages/flutter_inappwebview_web/assets/web/web_support.js": "509ae636cfdd93e49b5a6eaf0f06d79f",
+"assets/packages/flutter_inappwebview/assets/t_rex_runner/t-rex.css": "5a8d0222407e388155d7d1395a75d5b9",
+"assets/packages/flutter_inappwebview/assets/t_rex_runner/t-rex.html": "16911fcc170c8af1c5457940bd0bf055",
+"assets/shaders/ink_sparkle.frag": "ecc85a2e95f5e9f53123dcaf8cb9b6ce",
+"assets/AssetManifest.bin": "8d4938077802005408764be291282bec",
+"assets/fonts/MaterialIcons-Regular.otf": "028b98045bc856558bc319d177c4c306",
+"assets/assets/main_ilst_01.png": "4d467016c8c07e41e433709103031da1",
+"assets/assets/main_ilst_02.png": "97c27003b79650a0ac41158a69965806",
+"assets/assets/main_ilst_03.png": "e7b1a63f47f8d19d3c9aebab53f4fe03",
+"assets/assets/AssetManifest.json": "6992c2e9d92cf6c11a3f2b0efd0fdada",
+"assets/assets/main_ilst_04.png": "fbd3f6863b7c14008ecb622c1f8986bf",
+"assets/assets/main_ilst_05.png": "dcd1722c5f2be102a3bff95f63b5470d",
+"assets/assets/NOTICES": "2c6f7f1656fb3dacb7209c64a60cca8a",
+"assets/assets/digi_illustration/lucemon/script.json": "6e3807e4bf9b8f1921706bd7fe1c4aad",
+"assets/assets/digi_illustration/lucemon/lucemon_ilst.png": "5a7a3be794634a0fa19ca1fd54d0286b",
+"assets/assets/digi_illustration/lucemon/skill_02.png": "7ce4c9db5aca8aff970bbcd6da7866c2",
+"assets/assets/digi_illustration/lucemon/skill_03.png": "de1b49bdc59ef227da09e80db341cb66",
+"assets/assets/digi_illustration/lucemon/skill_01.png": "25230954b9d5907a9359ce63afcb65f1",
+"assets/assets/digi_illustration/lucemon/skill_04.png": "bee3e00581b3e2804f3e2c1c3b9100c0",
+"assets/assets/digi_illustration/omegamon_mm_sp/script.json": "a74169016dbd755da166b7d0dfa7fcd2",
+"assets/assets/digi_illustration/omegamon_mm_sp/omegamon_mm_sp_ilst.png": "d971eb9f1988f93b197a34577789f8d9",
+"assets/assets/digi_illustration/omegamon_mm_sp/skill_02.png": "7d7091a24c0b0ab08a5f050f0c34d19c",
+"assets/assets/digi_illustration/omegamon_mm_sp/skill_03.png": "dbea429cb3a35576ae7a9f0e2c39d212",
+"assets/assets/digi_illustration/omegamon_mm_sp/skill_01.png": "b77f85b896c3bb81a2bd7a267c330004",
+"assets/assets/digi_illustration/omegamon_mm_sp/skill_04.png": "85f10f2563d085a3002136be160f2189",
+"assets/assets/digi_illustration/nezhamon_cm/script.json": "cab353180f5d8677bb80f39ee927f57e",
+"assets/assets/digi_illustration/nezhamon_cm/nezhamon_cm_ilst.png": "2381658fcf13c0d34b15de1e5652f763",
+"assets/assets/digi_illustration/nezhamon_cm/skill_02.png": "fafdb8166ec9a8f3831d2300245756f3",
+"assets/assets/digi_illustration/nezhamon_cm/skill_03.png": "24b73d94bac29ec18101915f83155793",
+"assets/assets/digi_illustration/nezhamon_cm/skill_01.png": "7e6e56a7a19a8fa7cd38b6a04e466596",
+"assets/assets/digi_illustration/nezhamon_cm/skill_04.png": "2e00290f3f6af27a754ce3d40ba05504",
+"assets/assets/digi_illustration/takutoumon_wm/script.json": "e412507258d449a9db5ca926c475b97c",
+"assets/assets/digi_illustration/takutoumon_wm/skill_02.png": "05533ffafb39aef59417da4593655658",
+"assets/assets/digi_illustration/takutoumon_wm/skill_03.png": "fbd40a9f86e8ea75119b8f05bf2280a0",
+"assets/assets/digi_illustration/takutoumon_wm/skill_01.png": "9f470f9910c843e319e2cdbb99d95f14",
+"assets/assets/digi_illustration/takutoumon_wm/skill_04.png": "c009fef05b3ecd85a4b57b24b7952e86",
+"assets/assets/digi_illustration/takutoumon_wm/takutoumon_wm_ilst.png": "3f892fa3e27ed9340564b0121d9a6a72",
+"assets/assets/digi_illustration/shoutmon_x7/script.json": "3805cc3110507667cfbce97c8823bae2",
+"assets/assets/digi_illustration/shoutmon_x7/skill_02.png": "e6fdf3f7fcac1c6f7257f83a6f12c919",
+"assets/assets/digi_illustration/shoutmon_x7/shoutmon_x7_ilst.png": "b00ded2d2d9e11601cacac85983a5574",
+"assets/assets/digi_illustration/shoutmon_x7/skill_03.png": "c63aafbcccb944f4563dec1fd818c325",
+"assets/assets/digi_illustration/shoutmon_x7/skill_01.png": "34c2e3859e8abe392ea50f6f79a3132c",
+"assets/assets/digi_illustration/shoutmon_x7/skill_04.png": "b2437d4f46bc19bed3d412e8b6cad69f",
+"assets/assets/digi_illustration/erlangmon/script.json": "cd979655d90a75c92e9c8a21781a5a4b",
+"assets/assets/digi_illustration/erlangmon/skill_02.png": "7b82da5391868fd05026a5462823e6fc",
+"assets/assets/digi_illustration/erlangmon/skill_03.png": "5eda93f52f407506146adbf1344dcc37",
+"assets/assets/digi_illustration/erlangmon/skill_01.png": "19d88a8342949812c8b36e67dd2636dc",
+"assets/assets/digi_illustration/erlangmon/skill_04.png": "e38350b9c28d9f3d186437e44aad5a36",
+"assets/assets/digi_illustration/erlangmon/erlangmon_ilst.png": "8b485493d7824206f994d1354ff8e2ee",
+"assets/assets/digi_illustration/digimons.json": "49267e3c76f42fb04ae5896afe8f8297",
+"assets/assets/digi_illustration/agumon_bb/script.json": "72afafafbff946f04ae9bfbc158211a9",
+"assets/assets/digi_illustration/agumon_bb/agumon_bb_ilst.png": "88aa63504a1a4c9ab8c32de4167434df",
+"assets/assets/digi_illustration/agumon_bb/skill_02.png": "4033a578101ce8218607992e917e7131",
+"assets/assets/digi_illustration/agumon_bb/skill_03.png": "086aa56bde463197c48ea8fddcda6e52",
+"assets/assets/digi_illustration/agumon_bb/skill_01.png": "1e3c10285a13c5b68082fa013eb43916",
+"assets/assets/digi_illustration/agumon_bb/header.png": "15e7dbb29c0b537fbdf97223a6e42ff7",
+"assets/assets/digi_illustration/agumon_bb/skill_04.png": "c934696ff955f31b83aa2abcf5583dfe",
+"assets/assets/digi_illustration/jougamon/script.json": "edc8c94ed535173fb774ade08ea9bd54",
+"assets/assets/digi_illustration/jougamon/skill_02_02.png": "d17b19a00f8d7349723bf1afad1b8bf3",
+"assets/assets/digi_illustration/jougamon/skill_02_01.png": "96f297cff102db3a8686764f371285f6",
+"assets/assets/digi_illustration/jougamon/skill_02.png": "3f9b157ada9c16400122d6ce879b58df",
+"assets/assets/digi_illustration/jougamon/skill_03.png": "4756e34e9068039c34a7646de9f3572e",
+"assets/assets/digi_illustration/jougamon/skill_01.png": "3de94fe308877b410a674d6d55f8407c",
+"assets/assets/digi_illustration/jougamon/skill_04.png": "11f6ed87dd7198986454cc0165fd4ba6",
+"assets/assets/digi_illustration/jougamon/jougamon_ilst.png": "e5fc65232b721e1184235416473e47bb",
+"assets/assets/digi_illustration/shoutmon_x7_sm/script.json": "5d97d0763355ac5315e7f209197332fd",
+"assets/assets/digi_illustration/shoutmon_x7_sm/skill_02.png": "a670d29de7d8fb8aa29d72cb287ee899",
+"assets/assets/digi_illustration/shoutmon_x7_sm/skill_03.png": "0fe29e343c2487639008960c79b2b5d8",
+"assets/assets/digi_illustration/shoutmon_x7_sm/skill_01.png": "f19e8c52b8b3aa87364faf0e9254775a",
+"assets/assets/digi_illustration/shoutmon_x7_sm/skill_04.png": "9c259c03305c81c9a5c7d1d3b7360e7d",
+"assets/assets/digi_illustration/shoutmon_x7_sm/shoutmon_x7_sm_ilst.png": "7a7bd350f6d211cca55af683ab6b08e6",
+"assets/assets/digi_illustration/shagaramon/script.json": "06cf79aec831b909b904b7ef1863b41b",
+"assets/assets/digi_illustration/shagaramon/skill_02.png": "2a9069d18a0f84d6d9773c3561e0d2ef",
+"assets/assets/digi_illustration/shagaramon/skill_03.png": "b0e7bd00cc9980e73743955030a6a409",
+"assets/assets/digi_illustration/shagaramon/skill_01.png": "35909c720c0f060dffc64a6e157a8376",
+"assets/assets/digi_illustration/shagaramon/skill_04.png": "125125b4bd8e6dcb9175d4b311955d06",
+"assets/assets/digi_illustration/shagaramon/shagaramon_ilst.png": "ea2832c3fa3fa2298cd099003049043f",
+"assets/assets/digi_illustration/takutoumon/takutoumon_ilst.png": "2610723698c1efc496ffcc06a4a4c2cf",
+"assets/assets/digi_illustration/takutoumon/script.json": "9aae393ea3de298ab8e5a0b204200301",
+"assets/assets/digi_illustration/takutoumon/skill_02.png": "295aba1a5689de219bf4f72def388a99",
+"assets/assets/digi_illustration/takutoumon/skill_03.png": "336f3282a5aa7780d85b1f808561caa8",
+"assets/assets/digi_illustration/takutoumon/skill_01.png": "9a79096b90455ecd4d3eb64fff5c3e57",
+"assets/assets/digi_illustration/takutoumon/skill_04.png": "ae7644699d72d7d0310d4fb593c5889d",
+"assets/assets/digi_illustration/header_main_001.png": "a1a3944bf0508cd65b21401812c366d9",
+"assets/assets/digi_illustration/core_chip.png": "87a6f9f5970923431e2e04d9fabe6f38",
+"assets/assets/digi_illustration/header_main_002.png": "be12a1b46d103b8f2e8342e1ca2bc46e",
+"assets/assets/digi_illustration/header_main.png": "97b77492857f928132758e2d6fd2ba96",
+"assets/assets/digi_illustration/gabumon_bf/script.json": "3452a4aac0f5d5d5d5e4c0207e3abfe7",
+"assets/assets/digi_illustration/gabumon_bf/skill_02.png": "b26df1f02a637f1bee762316f3fb823f",
+"assets/assets/digi_illustration/gabumon_bf/skill_03.png": "da529f8ab34f138c98eaa1132f08540b",
+"assets/assets/digi_illustration/gabumon_bf/skill_01.png": "60d00e6a5d277e2bc5cf7e4ccbfa50e4",
+"assets/assets/digi_illustration/gabumon_bf/skill_04.png": "f5637a6c14d0b7739b519f5d3cf9f1e5",
+"assets/assets/digi_illustration/gabumon_bf/gabumon_bf_ilst.png": "ae7554ad0edfbf1df4cb0f8a2c8fcfde",
+"assets/assets/digi_illustration/cendrillmon/script.json": "17b260b01d78027a8bd88369941e7dc5",
+"assets/assets/digi_illustration/cendrillmon/cendrillmon_ilst.png": "28974b7a40b08e05041038529bbd2725",
+"assets/assets/digi_illustration/cendrillmon/skill_02.png": "b40f075611554fbd09dd448634a79104",
+"assets/assets/digi_illustration/cendrillmon/skill_03.png": "37119290bb3c03e9cc6e7a299c37e79a",
+"assets/assets/digi_illustration/cendrillmon/skill_01.png": "341d6908bbced9f8d8064a23f19a4de2",
+"assets/assets/digi_illustration/cendrillmon/skill_04.png": "696815cc146b194efadf9834e8bd4a64",
+"assets/assets/digi_illustration/nezhamon/nezhamon_ilst.png": "2519d17536347d023546e422f1667e15",
+"assets/assets/digi_illustration/nezhamon/script.json": "3ef121154a3f10d22329ab0ed08b3c0c",
+"assets/assets/digi_illustration/nezhamon/skill_02.png": "734caedd64e00461bd019eab9a293927",
+"assets/assets/digi_illustration/nezhamon/skill_03.png": "de5b2b4c12e81e76fde9f38b292f6892",
+"assets/assets/digi_illustration/nezhamon/skill_01.png": "dfd278995d31b3a4d5222c0ca0217426",
+"assets/assets/digi_illustration/nezhamon/skill_04.png": "45578e755f2f9eebce377a58e69bc9d1",
+"assets/assets/digi_illustration/alphamon_ouryuken/script.json": "d74106536ebafc2bdfc8245f08787547",
+"assets/assets/digi_illustration/alphamon_ouryuken/alphamon_ouryuken_ilst.png": "929f9714458c5a79e356812ebfd3cd3e",
+"assets/assets/digi_illustration/alphamon_ouryuken/skill_02.png": "740f248340f53b8be249895e330a8105",
+"assets/assets/digi_illustration/alphamon_ouryuken/skill_03.png": "b3a24dafb71762b6db1f21b142991496",
+"assets/assets/digi_illustration/alphamon_ouryuken/skill_01.png": "a42c8fa3f5656f401a9eb400dcc68669",
+"assets/assets/digi_illustration/alphamon_ouryuken/skill_04.png": "5b6f5782309e94ae6c41b9f3a790f488",
+"assets/assets/digi_illustration/omegamon_sp/script.json": "12941acc3167d10ae08692c5d157fd81",
+"assets/assets/digi_illustration/omegamon_sp/omegamon_sp_ilst.png": "742621387490546ca3b71cfe89e3dc25",
+"assets/assets/digi_illustration/omegamon_sp/skill_02_02.png": "ea7856493076969b0f324daf4aa33b11",
+"assets/assets/digi_illustration/omegamon_sp/skill_02_03.png": "d322a3c8166df50f2c651ee7c43cabd3",
+"assets/assets/digi_illustration/omegamon_sp/skill_02_01.png": "1c2041e6c4332363cde4af7dc14f3433",
+"assets/assets/digi_illustration/omegamon_sp/skill_02.png": "00939dfb57154c7584886829044dd6ee",
+"assets/assets/digi_illustration/omegamon_sp/skill_03.png": "52f805f91fc2becb8fbe6787a5c39759",
+"assets/assets/digi_illustration/omegamon_sp/skill_01.png": "5d3c3f47d2dfaf830e13e459d304f4e2",
+"assets/assets/digi_illustration/omegamon_sp/skill_04.png": "aae731bd2210cb4157272c5a9c107d66",
+"assets/assets/digi_illustration/erlangmon_bm/script.json": "0e8806bc8b150dfd295e313600688f34",
+"assets/assets/digi_illustration/erlangmon_bm/erlangmon_bm_ilst.png": "27fc258462d45f1c9d19233a2c42cf41",
+"assets/assets/digi_illustration/erlangmon_bm/skill_02_02.png": "d772631d2f556ec160d5e12d5c8b5f4f",
+"assets/assets/digi_illustration/erlangmon_bm/skill_02_03.png": "1158c104ed870af536c262ff12ddc233",
+"assets/assets/digi_illustration/erlangmon_bm/skill_02_01.png": "d772631d2f556ec160d5e12d5c8b5f4f",
+"assets/assets/digi_illustration/erlangmon_bm/skill_02.png": "d772631d2f556ec160d5e12d5c8b5f4f",
+"assets/assets/digi_illustration/erlangmon_bm/skill_03.png": "31b1a89296bc539f79a64d5aa5bfc98b",
+"assets/assets/digi_illustration/erlangmon_bm/skill_01.png": "7b8b6dcff41b0e42b5021b71c8d5908e",
+"assets/assets/digi_illustration/erlangmon_bm/skill_04.png": "e7650c05d689de8e60531183680dbb43",
+"assets/assets/FontManifest.json": "dc3d03800ccca4601324923c0b1d6d57",
+"assets/assets/AssetManifest.bin.json": "88f609b1ef7b60a71a5dbecdefeacb2f",
+"assets/assets/aa.json": "c71bc0709a2a85c858f293d4b5d553a7",
+"assets/assets/AssetManifest.bin": "8d4938077802005408764be291282bec",
+"assets/assets/icon/ic_missing.png": "3bae99d9f9547baf9e5a559e2232c8ee",
+"assets/assets/icon/app_icon.png": "3bae99d9f9547baf9e5a559e2232c8ee",
+"assets/assets/icon/element/ic_wind.png": "935f99c64769cf110013e31387822c7c",
+"assets/assets/icon/element/ic_light.png": "d9e60f5c83235a56d329689b69a71a23",
+"assets/assets/icon/element/ic_fire.png": "88b3d3977f3f775903364b035a6965cb",
+"assets/assets/icon/element/ic_nature.png": "d841768bc2b43ad5ea9d62ab0256ad6f",
+"assets/assets/icon/element/ic_water.png": "96d7a988f0f35f286f9bbc6326024975",
+"assets/assets/icon/element/ic_dark.png": "7c6cb75a4fcdb0a38795ce85b554afa0",
+"assets/assets/icon/element/ic_earth.png": "17029d28e913e83f8750d41a4cd9b2e9",
+"assets/assets/icon/element/ic_thunder.png": "24d985fef707ada09951fa6ec30d5875",
+"assets/assets/icon/grade/grade_22.png": "7757e7144f63025c6ad32487145e0b40",
+"assets/assets/icon/grade/grade_8.png": "acb84778d644ab4a519ea896d07cae53",
+"assets/assets/icon/grade/grade_18.png": "7619dbf9a655dd17a4980444688685dd",
+"assets/assets/icon/grade/grade_25.png": "457d3f44310e6a7c03e4d17b98fe8871",
+"assets/assets/icon/grade/grade_14.png": "3fea070c855e4cc4066d29bfc3e10232",
+"assets/assets/icon/grade/grade_11.png": "5386874bab2c94872275065f4abae480",
+"assets/assets/icon/type/ic_virus.png": "4c51df8090eb9f35007920ee9ef9ee16",
+"assets/assets/icon/type/ic_vaccine.png": "4e7620e6bd8750e07113a79314c4d4fa",
+"assets/assets/icon/type/ic_data.png": "c772b1cca1469d5bfdb2704f8544532a",
+"assets/assets/icon/equipment/all_round_data_block.png": "8d271aa4d7773d01bf7ddc8296c3608f",
+"assets/assets/icon/equipment/super_powered_shoes.png": "a568cf5c2c8542fe17532803c4c157bb",
+"assets/assets/icon/equipment/homesick_flute.png": "d6f6832380e23c3ee7aef08f9abe6ed4",
+"assets/assets/icon/equipment/data_blade.png": "f9d4bba53686bb39683cdd144531b4ad",
+"assets/assets/icon/equipment/magnetic_raincoat.png": "d3827c2620157bbf3270b62805b7ec7f",
+"assets/assets/icon/equipment/energy_scattering_scarf.png": "4b3b3fe3ec41e8c1fe4df338013d1431",
+"assets/assets/icon/equipment/feedback_device.png": "435983e520f7c30db9b1e49ddf0479b7",
+"assets/assets/icon/equipment/sentinels_eye.png": "5be197147f2208f17778d8f9cccdc72b",
+"assets/assets/icon/equipment/precision_scope.png": "cb2fcac5699bbf63b353aeae6311dc15",
+"assets/assets/icon/equipment/everchanging_bracelet.png": "54245a112e396bdcfa8be40cfa5a0121",
+"assets/assets/icon/equipment/concentrating_sponge.png": "992a28c07149c87ed6d88958d3124235",
+"assets/assets/icon/equipment/double_barreled_firecracker.png": "faf484d50995e6634a63ed25e474f76e",
+"assets/assets/icon/equipment/yi_neng_gloves.png": "422b9ed173a4c56e80ebf4e8608c089e",
+"assets/assets/icon/equipment/phantom_cloak.png": "af159e0075ab257fc0125a2e74771b6d",
+"assets/assets/icon/equipment/charm_perfume.png": "28abc194611e282a93a4a87253a09ea4",
+"assets/assets/icon/equipment/gravity_ember_wings.png": "070001a4dc71209251ea92a978bafa91",
+"assets/assets/icon/equipment/thunder_core.png": "1d5ca9ad054e863399acf2bd2209c032",
+"assets/assets/icon/equipment/force_field_generator.png": "a5111a5cb09a102e759296d3b4f2cade",
+"assets/assets/icon/equipment/super_energy_catheters.png": "73188134c06482b2b637baf76b7f7c1d",
+"assets/assets/icon/equipment/nuclear_power_furnace.png": "80333069af86156040414d02fa46b83a",
+"assets/assets/icon/equipment/energy_release_spray.png": "4ece1acb75804cb28775738c4330831b",
+"assets/assets/icon/equipment/warp_key.png": "ca43a3a69e04ff6e9b4e00e90b8293a3",
+"assets/assets/icon/equipment/armor_piercing_drill.png": "4d1aed777cf6db565a681f02a5954abf",
+"assets/assets/icon/equipment/firm_headphones.png": "77c22409ea5ae9ba9b05ecd127052a22",
+"assets/assets/icon/equipment/destiny_camera.png": "f432f14cef438c10fee8bc7116940bfb",
+"assets/assets/icon/equipment/status_mirror.png": "4b6ceb77dad8f6da522cf75f9fe7c0ab",
+"assets/assets/icon/equipment/concussion_grenade.png": "f73a4d2c4d6e93be2eefba849d9f7ccf",
+"assets/assets/icon/equipment/cyber_eyepiece.png": "7a5fe6e4754ea1eaee72edeead02300b",
+"assets/assets/icon/equipment/tactical_water_bottle.png": "bc7940738a0dd19e3387af105403b11f",
+"assets/assets/icon/equipment/energy_eraser.png": "28b3ea96648213b85cddea73645628d2",
+"assets/assets/icon/equipment/life_magnifier.png": "7320b5ebbc150a635dffdf493c063e06",
+"assets/assets/icon/equipment/laser_helmet.png": "cb512989c2cc9496ea922815850068a2",
+"assets/assets/icon/equipment/endless_hourglass.png": "914d84f65a44c2a904aeeddfa6945ec8",
+"assets/assets/icon/equipment/infinite_battery.png": "82b1525ed353f905b5826aa759725dde",
+"assets/assets/icon/equipment/training_manual.png": "0c9f597783ce29dd08f1d4292eeb5545",
+"assets/assets/icon/talents/endless_pain.png": "fd16e8e86801a2152ac2b9d3a31b24aa",
+"assets/assets/icon/talents/angel_blessing.png": "27ee3dc3a956ad4ee1a93df604ed8906",
+"assets/assets/icon/talents/main_skill_enhancement.png": "134cd8279d410b83511c16b3738a7d15",
+"assets/assets/icon/talents/energy_absorbing_armor.png": "4df44957bea8dcd1a3bcf16df29d3e16",
+"assets/assets/icon/talents/caution.png": "c0deff128dbc179344fdd4b88eaa7859",
+"assets/assets/icon/talents/evasion_enhancement.png": "e0537a0c893a37f42df456557433261f",
+"assets/assets/icon/talents/fearless.png": "c03be3c59c6027db97fc3c6564161c4f",
+"assets/assets/icon/talents/fanaticism.png": "a08a4274f418089ed242600740997a22",
+"assets/assets/icon/talents/sniper_fortress.png": "f4e4d7c4f75c9dbbcf9af6a16c6bfc14",
+"assets/assets/icon/talents/def_enhancement.png": "a57b9e6758b9814c453d2b4fdd36f1c9",
+"assets/assets/icon/talents/crit_damage_enhancement.png": "b0ba14a5c289164b7ec7b53c66739a30",
+"assets/assets/icon/talents/tactical_shield.png": "9303a293a07a6b8aa75155f67b2f4526",
+"assets/assets/icon/talents/jedi_counterattack.png": "3028be1cb9eebfc2925abc4592bd1c99",
+"assets/assets/icon/talents/giant_killer.png": "415ce361695730a770bc715fc1728cda",
+"assets/assets/icon/talents/normal_skill_enhancement.png": "7680e30bf6d04443f684d27ac5bde3f4",
+"assets/assets/icon/talents/sub_skill_enhancement.png": "73296755d38eebb799013c1e883bad36",
+"assets/assets/icon/talents/spd_enhancement.png": "9943964a2c4fe6520ce89eb7383a935b",
+"assets/assets/icon/talents/pain_suppression.png": "1753f542ffeac571dff064b94c4583c4",
+"assets/assets/icon/talents/first_aid_medicine.png": "f726e2159d89c60554b32da73e524a04",
+"assets/assets/icon/talents/hit_rate_enhancement.png": "a5999c1915f7821711801d3999c53d60",
+"assets/assets/icon/talents/debuff_hit_enhancement.png": "527fbb39f14517fd507a3b06b221d688",
+"assets/assets/icon/talents/status_resistance_enhancement.png": "608a96a92dff0cb26795b4605613e387",
+"assets/assets/icon/talents/double_energy.png": "14b17f3570f3f6dc8354327f7169e4c0",
+"assets/assets/icon/talents/ambush.png": "5cb3671d4c0acb71f2051e16f27d7068",
+"assets/assets/icon/talents/crit_rate_enhancement.png": "81c83837cbee11ee0918801ce3e0580b",
+"assets/assets/icon/talents/deep_suffering.png": "dd2409cff6f595b905af67ad3c70a7a5",
+"assets/assets/icon/talents/single_target_protection.png": "a116c598b2df3625bc12a390b870de4c",
+"assets/assets/icon/talents/life_aid.png": "aaf949b17d297d5ef9966588ad7e722a",
+"assets/assets/icon/talents/exertion.png": "68c8e630b6318edf5af596fd55c00b31",
+"assets/assets/icon/talents/atk_enhancement.png": "7313769cc0e8f3bfe4a3d209e8a645cb",
+"assets/assets/icon/talents/persecute.png": "b65936fb20d0759959d75cab5ecfecf7",
+"assets/assets/icon/talents/shield_barrier.png": "89fb6aafd47dcd7bd053e8d0aed6a591",
+"assets/assets/icon/talents/victory_exploitation.png": "156cfb9ccafbe0242a8fb6af0865f87f",
+"assets/assets/icon/talents/gathering_strength.png": "38429455e1e2cb87de06265da5e2ffef",
+"assets/assets/icon/talents/aerobicized.png": "b008bf9c2ca0138f3a6299856a83acac",
+"assets/assets/icon/talents/healing_lights.png": "86f9a6301226ca2ee7f8e5ec4ee10b42",
+"assets/assets/icon/talents/strong_will.png": "b4e2ade42d47ac915b4e1cd410a044a7",
+"assets/assets/icon/talents/difficulties_admiration.png": "db551e7108093d3882d96e4a5cfef553",
+"assets/assets/icon/talents/double_protection.png": "ddff5fbf8fa6b7f63ecae8b9c6631962",
+"assets/assets/icon/talents/blessings_inspirations.png": "48dbdfdf1cbb920c721c6421821ac601",
+"assets/assets/icon/talents/potential_explosion.png": "f12997d2e7c07d5ca12d3b8e0e81716a",
+"assets/assets/icon/talents/fight_till_death.png": "7050bc8a493984adc1b8d0d9272223e2",
+"assets/assets/icon/talents/life_regeneration.png": "e27f98b66f6c059b524335f2a3f51505",
+"assets/assets/icon/talents/toughness_enhancement.png": "745154bc085d1436144aea05e2f71f7a",
+"assets/assets/icon/talents/desperate_redemption.png": "99c6e0b2f37695d8b27124901680e2db",
+"assets/assets/icon/talents/final_words.png": "33811c48727ea557421a7039fda1d99e",
+"assets/assets/icon/talents/concentrated_conciousness.png": "a4d7f0c5459f61244613d9e8287b238f",
+"assets/assets/icon/talents/shield_resistance.png": "6816d566fae17f82c3258a8f1c170f12",
+"assets/assets/icon/talents/hp_enhancement.png": "0b936637fdc37165085fcad97a3998af",
+"assets/assets/icon/talents/life_protection.png": "ac7b5cb7e5af150755da1daa37865301",
+"assets/assets/icon/talents/survival_instinct.png": "0fef1111bf6125d02fc866ab16dd77fd",
+"assets/assets/icon/talents/fatal_blow.png": "99895fa1eec385fea7f11cfd74bf116e",
+"assets/assets/icon/talents/insult.png": "0bd2a9a2e599e8d19e7e3e8e019d2315",
+"canvaskit/skwasm_st.js": "d1326ceef381ad382ab492ba5d96f04d",
+"canvaskit/skwasm.js": "f2ad9363618c5f62e813740099a80e63",
+"canvaskit/skwasm.js.symbols": "80806576fa1056b43dd6d0b445b4b6f7",
+"canvaskit/canvaskit.js.symbols": "68eb703b9a609baef8ee0e413b442f33",
+"canvaskit/skwasm.wasm": "f0dfd99007f989368db17c9abeed5a49",
+"canvaskit/chromium/canvaskit.js.symbols": "5a23598a2a8efd18ec3b60de5d28af8f",
+"canvaskit/chromium/canvaskit.js": "ba4a8ae1a65ff3ad81c6818fd47e348b",
+"canvaskit/chromium/canvaskit.wasm": "64a386c87532ae52ae041d18a32a3635",
+"canvaskit/skwasm_st.js.symbols": "c7e7aac7cd8b612defd62b43e3050bdd",
+"canvaskit/canvaskit.js": "6cfe36b4647fbfa15683e09e7dd366bc",
+"canvaskit/canvaskit.wasm": "efeeba7dcc952dae57870d4df3111fad",
+"canvaskit/skwasm_st.wasm": "56c3973560dfcbf28ce47cebe40f3206"};
+// The application shell files that are downloaded before a service worker can
+// start.
+const CORE = ["main.dart.js",
+"index.html",
+"flutter_bootstrap.js",
+"assets/AssetManifest.bin.json",
+"assets/FontManifest.json"];
+
+// During install, the TEMP cache is populated with the application shell files.
+self.addEventListener("install", (event) => {
+  self.skipWaiting();
+  return event.waitUntil(
+    caches.open(TEMP).then((cache) => {
+      return cache.addAll(
+        CORE.map((value) => new Request(value, {'cache': 'reload'})));
+    })
+  );
+});
+// During activate, the cache is populated with the temp files downloaded in
+// install. If this service worker is upgrading from one with a saved
+// MANIFEST, then use this to retain unchanged resource files.
+self.addEventListener("activate", function(event) {
+  return event.waitUntil(async function() {
+    try {
+      var contentCache = await caches.open(CACHE_NAME);
+      var tempCache = await caches.open(TEMP);
+      var manifestCache = await caches.open(MANIFEST);
+      var manifest = await manifestCache.match('manifest');
+      // When there is no prior manifest, clear the entire cache.
+      if (!manifest) {
+        await caches.delete(CACHE_NAME);
+        contentCache = await caches.open(CACHE_NAME);
+        for (var request of await tempCache.keys()) {
+          var response = await tempCache.match(request);
+          await contentCache.put(request, response);
+        }
+        await caches.delete(TEMP);
+        // Save the manifest to make future upgrades efficient.
+        await manifestCache.put('manifest', new Response(JSON.stringify(RESOURCES)));
+        // Claim client to enable caching on first launch
+        self.clients.claim();
+        return;
+      }
+      var oldManifest = await manifest.json();
+      var origin = self.location.origin;
+      for (var request of await contentCache.keys()) {
+        var key = request.url.substring(origin.length + 1);
+        if (key == "") {
+          key = "/";
+        }
+        // If a resource from the old manifest is not in the new cache, or if
+        // the MD5 sum has changed, delete it. Otherwise the resource is left
+        // in the cache and can be reused by the new service worker.
+        if (!RESOURCES[key] || RESOURCES[key] != oldManifest[key]) {
+          await contentCache.delete(request);
+        }
+      }
+      // Populate the cache with the app shell TEMP files, potentially overwriting
+      // cache files preserved above.
+      for (var request of await tempCache.keys()) {
+        var response = await tempCache.match(request);
+        await contentCache.put(request, response);
+      }
+      await caches.delete(TEMP);
+      // Save the manifest to make future upgrades efficient.
+      await manifestCache.put('manifest', new Response(JSON.stringify(RESOURCES)));
+      // Claim client to enable caching on first launch
+      self.clients.claim();
+      return;
+    } catch (err) {
+      // On an unhandled exception the state of the cache cannot be guaranteed.
+      console.error('Failed to upgrade service worker: ' + err);
+      await caches.delete(CACHE_NAME);
+      await caches.delete(TEMP);
+      await caches.delete(MANIFEST);
+    }
+  }());
+});
+// The fetch handler redirects requests for RESOURCE files to the service
+// worker cache.
+self.addEventListener("fetch", (event) => {
+  if (event.request.method !== 'GET') {
+    return;
+  }
+  var origin = self.location.origin;
+  var key = event.request.url.substring(origin.length + 1);
+  // Redirect URLs to the index.html
+  if (key.indexOf('?v=') != -1) {
+    key = key.split('?v=')[0];
+  }
+  if (event.request.url == origin || event.request.url.startsWith(origin + '/#') || key == '') {
+    key = '/';
+  }
+  // If the URL is not the RESOURCE list then return to signal that the
+  // browser should take over.
+  if (!RESOURCES[key]) {
+    return;
+  }
+  // If the URL is the index.html, perform an online-first request.
+  if (key == '/') {
+    return onlineFirst(event);
+  }
+  event.respondWith(caches.open(CACHE_NAME)
+    .then((cache) =>  {
+      return cache.match(event.request).then((response) => {
+        // Either respond with the cached resource, or perform a fetch and
+        // lazily populate the cache only if the resource was successfully fetched.
+        return response || fetch(event.request).then((response) => {
+          if (response && Boolean(response.ok)) {
+            cache.put(event.request, response.clone());
+          }
+          return response;
+        });
+      })
+    })
+  );
+});
+self.addEventListener('message', (event) => {
+  // SkipWaiting can be used to immediately activate a waiting service worker.
+  // This will also require a page refresh triggered by the main worker.
+  if (event.data === 'skipWaiting') {
+    self.skipWaiting();
+    return;
+  }
+  if (event.data === 'downloadOffline') {
+    downloadOffline();
+    return;
+  }
+});
+// Download offline will check the RESOURCES for all files not in the cache
+// and populate them.
+async function downloadOffline() {
+  var resources = [];
+  var contentCache = await caches.open(CACHE_NAME);
+  var currentContent = {};
+  for (var request of await contentCache.keys()) {
+    var key = request.url.substring(origin.length + 1);
+    if (key == "") {
+      key = "/";
+    }
+    currentContent[key] = true;
+  }
+  for (var resourceKey of Object.keys(RESOURCES)) {
+    if (!currentContent[resourceKey]) {
+      resources.push(resourceKey);
+    }
+  }
+  return contentCache.addAll(resources);
+}
+// Attempt to download the resource online before falling back to
+// the offline cache.
+function onlineFirst(event) {
+  return event.respondWith(
+    fetch(event.request).then((response) => {
+      return caches.open(CACHE_NAME).then((cache) => {
+        cache.put(event.request, response.clone());
+        return response;
+      });
+    }).catch((error) => {
+      return caches.open(CACHE_NAME).then((cache) => {
+        return cache.match(event.request).then((response) => {
+          if (response != null) {
+            return response;
+          }
+          throw error;
+        });
+      });
+    })
+  );
+}
