@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:new_century/rotation_screen.dart';
 import 'battle_effects_screen.dart';
+import 'digimon_catalog_attr_screen.dart';
+import 'google_sheet_screen.dart';
 import 'guides_screen.dart';
 import 'main.dart';
 import 'talents_screen.dart';
@@ -26,7 +28,8 @@ class HomeMenuScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const SizedBox(height: 80),
-                _buildMenuButton(context, '디지몬 정보', const DigimonListScreen()),
+                //_buildMenuButton(context, '디지몬 정보', const DigimonListScreen()),
+                _buildMenuButton(context, '디지몬 정보', const DigimonCatalogAttrScreen()),
                 const SizedBox(height: 20),
                 _buildMenuButton(context, '공략 모음', const GuidesScreen()),
                 const SizedBox(height: 20),
