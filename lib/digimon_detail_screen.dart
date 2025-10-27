@@ -1,7 +1,6 @@
 // ignore_for_file: undefined_prefixed_name
 import 'dart:convert';
 import 'dart:math';
-
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
