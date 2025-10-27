@@ -5,14 +5,27 @@ import 'package:csv/csv.dart' as csv;
 
 import 'digimon_detail_screen.dart';
 
-/// ─────────────────────────────────────────────
-/// Google Sheets 설정 (사용자가 준 값 그대로)
-/// ─────────────────────────────────────────────
+/// 공개 CSV (목록)
 const String kListCsvUrl =
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vTx-6Id_QsgH9RT_GgelBNyzhSfpPS560GExIqBN6HmHKLU-Qe0rcrBv5JGNaONm8hngYrJbWJol5iu/pub?output=csv';
 
-/// 목록 파싱용 레이블/정규식
+/// 속성 라벨
 const List<String> _attrLabels = ['불', '물', '전기', '바람', '땅', '빛', '어둠', '무', '풀'];
+
+/// 속성 → 아이콘 경로 매핑
+const Map<String, String> _attrIcon = {
+  '불':   'assets/icon/element/ic_fire.png',
+  '물':   'assets/icon/element/ic_water.png',
+  '바람': 'assets/icon/element/ic_wind.png',
+  '풀':   'assets/icon/element/ic_nature.png',
+  '빛':   'assets/icon/element/ic_light.png',
+  '어둠': 'assets/icon/element/ic_dark.png',
+  '땅':   'assets/icon/element/ic_earth.png',
+  '전기': 'assets/icon/element/ic_thunder.png',
+  // 매칭 안 되면 기본값(빛)로
+};
+
+/// 구분/제외 행
 const Set<String> _stopWordsRow = {
   'z진화','Z진화','x진화','X진화','sp 진화','SP 진화','진화','급','25급','22급','18급'
 };
@@ -66,8 +79,7 @@ class _DigimonCatalogAttrScreenState extends State<DigimonCatalogAttrScreen> {
       final res = await http.get(Uri.parse(kListCsvUrl));
       if (res.statusCode != 200) throw Exception('HTTP ${res.statusCode}');
       final body = utf8.decode(res.bodyBytes);
-      final rows =
-      const csv.CsvToListConverter(shouldParseNumbers: false).convert(body);
+      final rows = const csv.CsvToListConverter(shouldParseNumbers: false).convert(body);
 
       final parsed = _parseAttrGrid(rows);
       setState(() {
@@ -133,7 +145,16 @@ class _DigimonCatalogAttrScreenState extends State<DigimonCatalogAttrScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // 칩 목록(“전체” + 등장한 속성)
     final attrs = <String>{'전체', ..._all.map((e) => e.attr)};
+    // 정렬(원하는 순서가 있으면 여기서 정렬 커스터마이즈)
+    final orderedAttrs = attrs.toList()
+      ..sort((a, b) {
+        if (a == '전체') return -1;
+        if (b == '전체') return 1;
+        return a.compareTo(b);
+      });
+
     final filtered = _all.where((e) {
       final okAttr = _selectedAttr == '전체' || e.attr == _selectedAttr;
       final okText = _query.isEmpty || e.name.toLowerCase().contains(_query.toLowerCase());
@@ -151,6 +172,7 @@ class _DigimonCatalogAttrScreenState extends State<DigimonCatalogAttrScreen> {
           ? Center(child: Text('불러오기 실패: $_error'))
           : Column(
         children: [
+          // 검색
           Padding(
             padding: const EdgeInsets.fromLTRB(12, 10, 12, 6),
             child: TextField(
@@ -168,25 +190,40 @@ class _DigimonCatalogAttrScreenState extends State<DigimonCatalogAttrScreen> {
               onChanged: (s) => setState(() => _query = s.trim()),
             ),
           ),
+          // 속성 필터 칩 (아이콘 + 텍스트)
           SizedBox(
-            height: 44,
+            height: 48,
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               scrollDirection: Axis.horizontal,
-              children: attrs.map((a) {
+              children: orderedAttrs.map((a) {
                 final selected = a == _selectedAttr;
                 return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
+                  padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
                   child: ChoiceChip(
-                    label: Text(a),
                     selected: selected,
                     onSelected: (_) => setState(() => _selectedAttr = a),
+                    label: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        if (a != '전체') ...[
+                          Image.asset(
+                            _attrIcon[a] ?? _attrIcon['빛']!,
+                            width: 18,
+                            height: 18,
+                          ),
+                          const SizedBox(width: 6),
+                        ],
+                        Text(a),
+                      ],
+                    ),
                   ),
                 );
               }).toList(),
             ),
           ),
           const SizedBox(height: 6),
+          // 목록
           Expanded(
             child: ListView.separated(
               padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
@@ -194,13 +231,31 @@ class _DigimonCatalogAttrScreenState extends State<DigimonCatalogAttrScreen> {
               separatorBuilder: (_, __) => const SizedBox(height: 6),
               itemBuilder: (_, i) {
                 final e = filtered[i];
+                final iconPath = _attrIcon[e.attr] ?? _attrIcon['빛']!;
                 return ListTile(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                     side: const BorderSide(color: Color(0x22000000)),
                   ),
-                  title: Text(e.name, style: const TextStyle(fontWeight: FontWeight.w700)),
-                  subtitle: Text(e.attr),
+                  leading: CircleAvatar(
+                    backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+                    radius: 18,
+                    child: Padding(
+                      padding: const EdgeInsets.all(4),
+                      child: Image.asset(iconPath),
+                    ),
+                  ),
+                  title: Text(
+                    e.name,
+                    style: const TextStyle(fontWeight: FontWeight.w700),
+                  ),
+                  subtitle: Row(
+                    children: [
+                      Image.asset(iconPath, width: 16, height: 16),
+                      const SizedBox(width: 6),
+                      Text(e.attr),
+                    ],
+                  ),
                   trailing: const Icon(Icons.chevron_right),
                   onTap: () => Navigator.push(
                     context,
